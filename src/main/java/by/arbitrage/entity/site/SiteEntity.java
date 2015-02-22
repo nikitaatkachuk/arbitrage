@@ -1,4 +1,4 @@
-package by.arbitrage.entity;
+package by.arbitrage.entity.site;
 
 import by.arbitrage.entity.user.UserEntity;
 

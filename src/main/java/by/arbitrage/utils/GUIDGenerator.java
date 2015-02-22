@@ -7,10 +7,13 @@ import java.util.UUID;
  */
 public final class GUIDGenerator
 {
-	//TODO create method for guid
-
-	public static void main(String[] args)
+	public static String GUIDByString(String s)
 	{
-		System.out.println(UUID.randomUUID());
+		return String.valueOf(UUID.fromString(s));
+	}
+
+	public static String randomGUID()
+	{
+		return String.valueOf(UUID.randomUUID());
 	}
 }

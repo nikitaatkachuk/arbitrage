@@ -23,10 +23,8 @@ public class SpringMVCInitializer implements WebApplicationInitializer
 	{
 		AnnotationConfigWebApplicationContext annotationConfigWebApplicationContext = new AnnotationConfigWebApplicationContext();
 		annotationConfigWebApplicationContext.register(WebAppConfig.class);
-		ApplicationContextProvider.getInstance().setApplicationContext(annotationConfigWebApplicationContext);
 		servletContext.addListener(new ContextLoaderListener(annotationConfigWebApplicationContext));
-		servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null,false,"/*");
-
+		servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false,"/*");
 		annotationConfigWebApplicationContext.setServletContext(servletContext);
 
 		ServletRegistration.Dynamic servlet = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(annotationConfigWebApplicationContext));

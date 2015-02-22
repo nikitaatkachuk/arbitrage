@@ -1,21 +1,24 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
-import by.arbitrage.entity.SiteEntity;
+import by.arbitrage.dto.SiteDTO;
+import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.service.SiteService;
-import by.arbitrage.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 /**
  * Created by Nikita Tkachuk
  */
 @Controller
+@RequestMapping("site")
 public class SiteController
 {
 	@Autowired
@@ -25,11 +28,13 @@ public class SiteController
 	private UserContext userContext;
 
 
-	@RequestMapping(value = "/sites")
-	public String get(Model model)
+	@RequestMapping(method = RequestMethod.GET)
+	@ModelAttribute("currentSite")
+	public SiteEntity getSite(@RequestParam(value = "id", required = true) int id)
 	{
-		model.addAttribute("sites", service.getAllSites());
-		return "sites";
+		Long idL = Long.valueOf(id);
+		//model.addAttribute("currentSite", service.findSiteById(idL));
+		return service.findSiteById(idL);
 	}
 
 	@ModelAttribute("allSites")
@@ -38,10 +43,14 @@ public class SiteController
 		return service.getAllSites();
 	}
 
-	@ModelAttribute("currentUserSites")
-	public List<SiteEntity> currentUserSites()
+	public List<SiteDTO> currentUserSites()
 	{
-		return userContext.getCurrentUser().getSites();
+		return SiteDTO.convertEntityList(userContext.getCurrentUser().getSites());
+	}
+
+	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<SiteDTO> sites)
+	{
+		return SiteDTO.convertEntityList(service.saveSites(principal.getName(), sites));
 	}
 
 }

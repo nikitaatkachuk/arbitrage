@@ -11,11 +11,19 @@
       <p>Welcome!</p>
       <div th:text="${#authentication.name}">
       </div>
-      <a href="sites.html" > Your sites</a>
-  </div>
-  <div sec:authorize="!isAuthenticated()">
-      <h2>You need authorization</h2>
-      <a class="btn btn-lg btn-success" href="login.html" role="button">Login</a>
+      <h2>Your sites:</h2>
+      <table th:unless="${#lists.isEmpty(currentUserSites)}" class="table table-hover table-bordered">
+          <thead>
+          <tr class="success">
+              <td>URL</td>
+              <td>Has been added:</td>
+          </tr>
+          </thead>
+          <tr th:each="site : ${currentUserSites}" class="info">
+              <td><a th:text="${site.url}" th:href="@{/site/(id=${site.id})}"></a></td>
+              <!--<td th:text="${cont.firstname}">The last name</td>-->
+          </tr>
+      </table>
   </div>
   </div>
   </div>

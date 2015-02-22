@@ -1,9 +1,8 @@
 package by.arbitrage.entity.user;
 
-import by.arbitrage.entity.SiteEntity;
+import by.arbitrage.entity.site.SiteEntity;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user")
-public class UserEntity
+public class UserEntity implements User
 {
 	@Id
 	@GeneratedValue
@@ -49,6 +48,7 @@ public class UserEntity
 		this.id = id;
 	}
 
+	@Override
 	public String getLogin()
 	{
 		return login;
@@ -59,6 +59,7 @@ public class UserEntity
 		this.login = login;
 	}
 
+	@Override
 	public String getGuid()
 	{
 		return guid;
@@ -79,6 +80,7 @@ public class UserEntity
 		this.password = password;
 	}
 
+	@Override
 	public List<SiteEntity> getSites()
 	{
 		return sites;

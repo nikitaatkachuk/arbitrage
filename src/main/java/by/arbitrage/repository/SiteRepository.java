@@ -1,9 +1,7 @@
 package by.arbitrage.repository;
 
-import by.arbitrage.entity.SiteEntity;
+import by.arbitrage.entity.site.SiteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Locale;
 
 /**
  * Created by Nikita Tkachuk
