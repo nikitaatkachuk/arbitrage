@@ -14,14 +14,14 @@ import java.util.List;
 public class SiteEntity
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String url;
 
 	private String guid;
 
-	@ManyToMany(mappedBy = "sites", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
 	private List<UserEntity> users;
 
 	public SiteEntity()

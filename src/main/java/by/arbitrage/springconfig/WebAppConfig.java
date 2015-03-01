@@ -1,18 +1,17 @@
 package by.arbitrage.springconfig;
 
-import by.arbitrage.context.ApplicationContextProvider;
 import by.arbitrage.context.UserContext;
-import by.arbitrage.facade.EntryFacade;
 import by.arbitrage.service.user.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Created by Nikita Tkachuk
@@ -57,7 +56,26 @@ public class WebAppConfig extends WebMvcConfigurerAdapter
 	{
 		return ApplicationContextProvider.getInstance();
 	}*/
+	/*@Bean
+	public RequestMappingHandlerAdapter requestMappingHandlerAdapter()
+	{
+		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
+		List<HttpMessageConverter<?>> list = new ArrayList<>(1);
+		list.add(jackson2HttpMessageConverter());
+		adapter.setMessageConverters(list);
+		adapter.setRequireSession(false);
+		adapter.setSupportedMethods("POST", "GET", "PUT");
+		return adapter;
+	}
 
+	@Bean
+	public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter()
+	{
+		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
+		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
+		return converter;
+	}*/
 
 	@Bean
 	public UserDetailsService userDetailService()

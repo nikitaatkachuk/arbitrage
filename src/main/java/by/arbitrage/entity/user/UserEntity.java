@@ -13,7 +13,7 @@ import java.util.List;
 public class UserEntity implements User
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String login;
@@ -23,7 +23,7 @@ public class UserEntity implements User
 	private String guid;
 
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinTable(name = "jnd_site_user", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "site_fk"))
 	private List<SiteEntity> sites;
 
@@ -89,5 +89,34 @@ public class UserEntity implements User
 	public void setSites(List<SiteEntity> sites)
 	{
 		this.sites = sites;
+	}
+
+	public void addSite(SiteEntity site)
+	{
+		this.sites.add(site);
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (!(o instanceof UserEntity)) return false;
+
+		UserEntity that = (UserEntity) o;
+
+		if (!guid.equals(that.guid)) return false;
+		if (!id.equals(that.id)) return false;
+		if (!login.equals(that.login)) return false;
+
+		return true;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = id.hashCode();
+		result = 31 * result + login.hashCode();
+		result = 31 * result + guid.hashCode();
+		return result;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.util.Log4jConfigListener;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ public class SpringMVCInitializer implements WebApplicationInitializer
 		AnnotationConfigWebApplicationContext annotationConfigWebApplicationContext = new AnnotationConfigWebApplicationContext();
 		annotationConfigWebApplicationContext.register(WebAppConfig.class);
 		servletContext.addListener(new ContextLoaderListener(annotationConfigWebApplicationContext));
+		servletContext.addListener(new Log4jConfigListener());
 		servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain")).addMappingForUrlPatterns(null, false,"/*");
 		annotationConfigWebApplicationContext.setServletContext(servletContext);
 

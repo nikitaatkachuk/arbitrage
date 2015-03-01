@@ -1,8 +1,8 @@
 package by.arbitrage.service;
 
-import by.arbitrage.context.UserContext;
 import by.arbitrage.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.repository.SiteRepository;
 import by.arbitrage.service.user.UserService;
 import by.arbitrage.utils.GUIDGenerator;
@@ -42,18 +42,40 @@ public class SiteService
 		return repository.findOne(id);
 	}
 
+	public SiteEntity findUserSiteById(UserEntity user, Long id)
+	{
+		SiteEntity site = findSiteById(id);
+		if(site == null)
+		{
+			return null;
+		}
+		return site.getUsers().contains(user) ? site : null;
+	}
+
+	@Transactional
+	public SiteEntity saveSite(String userName, SiteDTO siteDTO)
+	{
+		return repository.save(convertDTOtoEntity(userName, siteDTO));
+	}
+
 	@Transactional
 	public List<SiteEntity> saveSites(String userName, List<SiteDTO> siteDTOList)
 	{
 		List<SiteEntity> entityList = new ArrayList<>();
 		for (SiteDTO siteDTO : siteDTOList)
 		{
-			SiteEntity entity = new SiteEntity();
-			entity.setUrl(siteDTO.getUrl());
-			entity.setGuid(GUIDGenerator.GUIDByString(siteDTO.getUrl()));
-			entity.setUsers(Collections.singletonList(userService.getUserByLogin(userName)));
+			entityList.add(convertDTOtoEntity(userName, siteDTO));
 		}
 		repository.save(entityList);
 		return entityList;
+	}
+
+	public SiteEntity convertDTOtoEntity(String userName, SiteDTO siteDTO)
+	{
+		SiteEntity entity = new SiteEntity();
+		entity.setUrl(siteDTO.getUrl());
+		entity.setGuid(GUIDGenerator.randomGUID());
+		entity.setUsers(Collections.singletonList(userService.getUserByLogin(userName)));
+		return entity;
 	}
 }

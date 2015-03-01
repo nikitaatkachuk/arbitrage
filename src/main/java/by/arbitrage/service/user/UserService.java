@@ -11,7 +11,7 @@ public interface UserService
 {
 	String BEAN_NAME = "UserService";
 
-	UserEntity create(UserEntity user);
+	UserEntity save(UserEntity user);
 
 	List<UserEntity> findAll();
 

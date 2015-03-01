@@ -7,8 +7,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h2>lol</h2>
-<p th:text="${currentSite.url}"></p>
+<div th:if="${currentSite} == null">
+<h2>Site cannot be found</h2>
+</div>
+<div th:if="${currentSite} != null">
+<div class="container>">
+    <div class="jumbotron">
+<h2 th:text="${currentSite.getUrl()}"></h2>
 
+        <button class="btn btn-link">Script</button>
+        <button class="btn btn-link">Statistic</button>
+    </div>
+    </div>
+</div>
 </body>
 </html>

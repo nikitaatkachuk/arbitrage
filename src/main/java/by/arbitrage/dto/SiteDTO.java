@@ -14,6 +14,17 @@ public class SiteDTO
 
 	private String url;
 
+	public SiteDTO()
+	{
+	}
+
+	public SiteDTO(String url)
+	{
+		this.url = url;
+	}
+
+
+
 	public SiteDTO(Long id, String url)
 	{
 		this.id = id;

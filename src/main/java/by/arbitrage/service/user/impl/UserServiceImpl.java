@@ -1,5 +1,7 @@
 package by.arbitrage.service.user.impl;
 
+import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.entity.user.User;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.repository.UserRepository;
 import by.arbitrage.service.user.UserService;
@@ -9,6 +11,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
@@ -19,14 +23,18 @@ import java.util.List;
 @Scope(value = "singleton")
 public class UserServiceImpl implements UserService
 {
+	@PersistenceContext
+	private EntityManager em;
+
 	@Qualifier("userRepository")
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
-	public UserEntity create(UserEntity user)
+	@Transactional
+	public UserEntity save(UserEntity user)
 	{
-		return userRepository.saveAndFlush(user);
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -40,6 +48,11 @@ public class UserServiceImpl implements UserService
 	{
 		return userRepository.findUserByLogin(login);
 	}
+
+	/*public UserEntity sav(UserEntity entity)
+	{
+		userRepository
+	}*/
 
 
 

@@ -1,8 +1,10 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
+import by.arbitrage.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.user.UserEntity;
+import by.arbitrage.service.SiteService;
 import by.arbitrage.service.user.UserService;
 import by.arbitrage.service.user.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by Nikita Tkachuk
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController
 {
@@ -23,6 +25,9 @@ public class UserController
 	private UserService userService;
 	@Autowired
 	private UserContext userContext;
+	@Autowired
+	private SiteService siteService;
+
 
 	public @ResponseBody UserEntity get(@RequestBody UserEntity entity)
 	{
@@ -30,17 +35,22 @@ public class UserController
 	}
 
 
-	//@ModelAttribute("currentUserSites")
-	@RequestMapping(value = "/currentUsers", method = RequestMethod.GET, produces = {"application/json"})
-	@ResponseStatus(HttpStatus.OK)
-	public List<SiteEntity> currentUserSites()
+	@RequestMapping( method = RequestMethod.GET, value = "/addSite")
+	public @ResponseBody
+	SiteDTO addSite(@RequestParam(value = "url") String newSiteURL)
 	{
-		return userContext.getCurrentUser().getSites();
-	}
-
-	@ModelAttribute("allUsers")
-	public List<UserEntity> users()
-	{
-		return userService.findAll();
+		if(newSiteURL != null)
+		{
+			SiteDTO dto = new SiteDTO(newSiteURL);
+			SiteEntity siteEntity = siteService.convertDTOtoEntity(userContext.getCurrentUserName(), dto);
+			UserEntity currentUser = userContext.getCurrentUser();
+			currentUser.addSite(siteEntity);
+			userService.save(currentUser);
+			return SiteDTO.convertFromEntity(siteEntity);
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

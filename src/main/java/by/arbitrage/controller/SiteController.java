@@ -32,9 +32,8 @@ public class SiteController
 	@ModelAttribute("currentSite")
 	public SiteEntity getSite(@RequestParam(value = "id", required = true) int id)
 	{
-		Long idL = Long.valueOf(id);
-		//model.addAttribute("currentSite", service.findSiteById(idL));
-		return service.findSiteById(idL);
+		Long idL = (long) id;
+		return service.findUserSiteById(userContext.getCurrentUser(), idL);
 	}
 
 	@ModelAttribute("allSites")
