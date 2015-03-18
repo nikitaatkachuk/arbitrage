@@ -1,4 +1,4 @@
-package by.arbitrage.dto;
+package by.arbitrage.entity.user;
 
 /**
  * Created by Nikita Tkachuk

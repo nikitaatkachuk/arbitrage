@@ -17,6 +17,14 @@
 
         <button class="btn btn-link">Script</button>
         <button class="btn btn-link">Statistic</button>
+
+        <div th:if="${statistic} != null">
+            <div th:text="${statistic.getFirstVisits()}"></div>
+        </div>
+        <div th:if="${statistic} == null">
+            <div th:text="ozozozo"></div>
+        </div>
+
     </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-package by.arbitrage.dto;
+package by.arbitrage.entity.site;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

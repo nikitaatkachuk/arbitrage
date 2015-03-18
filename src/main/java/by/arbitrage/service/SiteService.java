@@ -1,6 +1,6 @@
 package by.arbitrage.service;
 
-import by.arbitrage.dto.SiteDTO;
+import by.arbitrage.entity.site.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.repository.SiteRepository;
@@ -42,6 +42,11 @@ public class SiteService
 		return repository.findOne(id);
 	}
 
+	public SiteEntity findSiteByGuid(String guid)
+	{
+		return repository.findSiteByGuid(guid);
+	}
+
 	public SiteEntity findUserSiteById(UserEntity user, Long id)
 	{
 		SiteEntity site = findSiteById(id);
@@ -75,7 +80,7 @@ public class SiteService
 		SiteEntity entity = new SiteEntity();
 		entity.setUrl(siteDTO.getUrl());
 		entity.setGuid(GUIDGenerator.randomGUID());
-		entity.setUsers(Collections.singletonList(userService.getUserByLogin(userName)));
+		entity.setUsers(Collections.singletonList(userService.findUserByLogin(userName)));
 		return entity;
 	}
 }

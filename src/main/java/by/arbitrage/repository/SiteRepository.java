@@ -11,4 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface SiteRepository extends JpaRepository<SiteEntity, Long>
 {
 	SiteEntity findSiteByUrl(String url);
+
+	SiteEntity findSiteByGuid(String guid);
 }

@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "site")
-public class SiteEntity
+public class SiteEntity implements Site
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,7 @@ public class SiteEntity
 		this.url = url;
 	}
 
+	@Override
 	public Long getId()
 	{
 		return id;
@@ -43,6 +44,7 @@ public class SiteEntity
 		this.id = id;
 	}
 
+	@Override
 	public String getUrl()
 	{
 		return url;
@@ -63,6 +65,7 @@ public class SiteEntity
 		this.guid = guid;
 	}
 
+	@Override
 	public List<UserEntity> getUsers()
 	{
 		return users;

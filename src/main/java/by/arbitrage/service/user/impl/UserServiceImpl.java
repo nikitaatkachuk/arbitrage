@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService
 	@PersistenceContext
 	private EntityManager em;
 
-	@Qualifier("userRepository")
 	@Autowired
 	private UserRepository userRepository;
 
@@ -44,9 +43,15 @@ public class UserServiceImpl implements UserService
 	}
 
 	@Override
-	public UserEntity getUserByLogin(String login)
+	public UserEntity findUserByLogin(String login)
 	{
 		return userRepository.findUserByLogin(login);
+	}
+
+	@Override
+	public UserEntity findUserByGiud(String guid)
+	{
+		return userRepository.findUserByGuid(guid);
 	}
 
 	/*public UserEntity sav(UserEntity entity)

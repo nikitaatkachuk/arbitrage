@@ -59,7 +59,6 @@ public class UserEntity implements User
 		this.login = login;
 	}
 
-	@Override
 	public String getGuid()
 	{
 		return guid;

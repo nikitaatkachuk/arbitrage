@@ -1,5 +1,7 @@
 package by.arbitrage.dto;
 
+import by.arbitrage.entity.site.SiteDTO;
+
 import java.util.List;
 
 /**

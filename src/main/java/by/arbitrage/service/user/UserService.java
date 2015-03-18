@@ -15,5 +15,7 @@ public interface UserService
 
 	List<UserEntity> findAll();
 
-	UserEntity getUserByLogin(String login);
+	UserEntity findUserByLogin(String login);
+
+	UserEntity findUserByGiud(String guid);
 }

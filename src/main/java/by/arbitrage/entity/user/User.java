@@ -11,7 +11,5 @@ public interface User
 {
 	String getLogin();
 
-	String getGuid();
-
 	List<SiteEntity> getSites();
 }

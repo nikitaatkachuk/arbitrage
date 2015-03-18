@@ -5,9 +5,7 @@ import by.arbitrage.facade.EntryFacade;
 import by.arbitrage.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Nikita Tkachuk
@@ -31,7 +29,7 @@ public class UserContext
 
 	public UserEntity getCurrentUser()
 	{
-		return service.getUserByLogin(getCurrentUserName());
+		return service.findUserByLogin(getCurrentUserName());
 	}
 
 	private EntryFacade getEntryFacade()
