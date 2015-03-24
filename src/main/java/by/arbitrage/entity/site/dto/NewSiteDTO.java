@@ -1,4 +1,4 @@
-package by.arbitrage.entity.site;
+package by.arbitrage.entity.site.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,6 +18,11 @@ public class NewSiteDTO implements Serializable
 
 	public NewSiteDTO()
 	{
+	}
+
+	public NewSiteDTO(String url)
+	{
+		this.url = url;
 	}
 
 	public String getUrl()
