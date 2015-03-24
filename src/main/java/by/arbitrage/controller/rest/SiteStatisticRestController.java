@@ -28,7 +28,7 @@ public class SiteStatisticRestController
 	private StatisticService statisticService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	private void incrementSiteStat(@RequestParam(value = "siteGuid", required = true) String siteGuid,
+	public void incrementSiteStat(@RequestParam(value = "siteGuid", required = true) String siteGuid,
 	                               @RequestParam(value = "userGuid", required = true)String userGuid,
 									@RequestParam(value = "isCookie", required = false, defaultValue = "0") boolean isCookie)
 	{
@@ -37,7 +37,6 @@ public class SiteStatisticRestController
 			UserEntity user = userService.findUserByGiud(userGuid);
 			SiteEntity site = siteService.findSiteByGuid(siteGuid);
 			statisticService.registerVisit(site, user, isCookie);
-
 		}
 		catch (Exception e)
 		{

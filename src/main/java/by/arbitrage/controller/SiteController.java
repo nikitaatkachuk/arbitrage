@@ -1,7 +1,8 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
-import by.arbitrage.entity.site.SiteDTO;
+import by.arbitrage.entity.site.dto.NewSiteDTO;
+import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.statistic.Statistic;
 import by.arbitrage.service.SiteService;
@@ -18,7 +19,7 @@ import java.util.List;
  * Created by Nikita Tkachuk
  */
 @Controller
-@RequestMapping("site")
+//@RequestMapping("/site")
 public class SiteController
 {
 	@Autowired
@@ -30,17 +31,16 @@ public class SiteController
 	@Autowired
 	private StatisticService statisticService;
 
-	private SiteEntity currentSite;
 
 
-	@RequestMapping(method = RequestMethod.GET)
-	@ModelAttribute("currentSite")
-	public SiteEntity getSite(@RequestParam(value = "id", required = true) int id)
+	@RequestMapping(method = RequestMethod.GET, value = "/site/{id}")
+	//@ModelAttribute("currentSite")
+	public String getSite(Model model , @PathVariable String id)
 	{
-		SiteEntity currentSite = service.findUserSiteById(userContext.getCurrentUser(), (long) id );
-		this.currentSite = currentSite;
+		SiteEntity currentSite = service.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
+		model.addAttribute("currentSite", currentSite);
 		getStatistic(currentSite);
-		return currentSite;
+		return "site";
 	}
 
 	@ModelAttribute("allSites")
@@ -70,7 +70,7 @@ public class SiteController
 		return SiteDTO.convertEntityList(userContext.getCurrentUser().getSites());
 	}
 
-	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<SiteDTO> sites)
+	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<NewSiteDTO> sites)
 	{
 		return SiteDTO.convertEntityList(service.saveSites(principal.getName(), sites));
 	}

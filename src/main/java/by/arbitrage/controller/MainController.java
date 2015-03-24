@@ -1,7 +1,7 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
-import by.arbitrage.entity.site.SiteDTO;
+import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.ErrorMessage;
 import by.arbitrage.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
