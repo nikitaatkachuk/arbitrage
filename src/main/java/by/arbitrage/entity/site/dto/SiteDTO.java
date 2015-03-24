@@ -1,4 +1,6 @@
-package by.arbitrage.entity.site;
+package by.arbitrage.entity.site.dto;
+
+import by.arbitrage.entity.site.SiteEntity;
 
 import java.util.ArrayList;
 import java.util.List;
