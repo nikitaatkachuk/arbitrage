@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>You sites</title>
+    <title>You site</title>
     <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.css}" th:rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/resources/css/main.css}" th:rel="stylesheet"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -20,6 +21,28 @@
 
         <div th:if="${statistic} != null">
             <div th:text="${statistic.getFirstVisits()}"></div>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <td>
+                            First visits
+                        </td>
+                        <td>
+                            Second visits
+                        </td>
+                        <td>
+                            Orders
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${statistic.getFirstVisits()}"></td>
+                        <td th:text="${statistic.getSecondVisits()}"></td>
+                        <td th:text="${statistic.getOrderCount()}"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div th:if="${statistic} == null">
             <div th:text="ozozozo"></div>

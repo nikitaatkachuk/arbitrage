@@ -33,14 +33,13 @@ function addSite()
    // var json = {"url" : siteUrl } ;
     $.ajax({
         url: '/user/addSite',
-        type: 'GET',
+        type: 'POST',
         data : ({
             url: siteUrl
         }),
         success: function(data) {
             closeAddSiteDialog();
-            alert('Site has been added');
-
+            $(".sites_table").append("<tr><td class='info'><a href= /site?id=" + data.id + ">" + data.url + "</a></td><td></td></tr>");
         },
         error: function(xhr, status, error) {
             //var err = eval("(" + xhr.responseText + ")");

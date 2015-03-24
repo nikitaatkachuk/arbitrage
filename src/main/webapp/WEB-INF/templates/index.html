@@ -18,15 +18,17 @@
       <h2>Your sites:</h2>
       <table th:unless="${#lists.isEmpty(currentUserSites)}" class="table table-hover table-bordered">
           <thead>
-          <tr class="success">
-              <td>URL</td>
-              <td>Has been added:</td>
-          </tr>
+              <tr class="success">
+                  <td>URL</td>
+                  <td>Has been added:</td>
+              </tr>
           </thead>
-          <tr th:each="site : ${currentUserSites}" class="info">
-              <td><a th:text="${site.url}" th:href="@{/site/(id=${site.id})}"></a></td>
-              <!--<td th:text="${cont.firstname}">The last name</td>-->
-          </tr>
+          <tbody class="sites_table">
+              <tr th:each="site : ${currentUserSites}" class="info">
+                  <td><a th:text="${site.url}" th:href="@{/site/(id=${site.id})}"></a></td>
+                  <!--<td th:text="${cont.firstname}">The last name</td>-->
+              </tr>
+          </tbody>
       </table>
       <button class="btn btn-primary" onclick="showAddSiteDialog()">Add site</button>
       <div class="addSiteDialog">
@@ -42,10 +44,5 @@
   </div>
   </div>
   </div>
-  <!--<div sec:authorize="hasRole('ADMIN')">-->
-      <!--<div th:text="${#authentication.name}">-->
-          <!--The value of the "name" property of the authentication object should appear here.-->
-      <!--</div>-->
-  <!--</div>-->
   </body>
 </html>
