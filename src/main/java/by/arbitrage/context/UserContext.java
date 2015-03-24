@@ -1,7 +1,6 @@
 package by.arbitrage.context;
 
 import by.arbitrage.entity.user.UserEntity;
-import by.arbitrage.facade.EntryFacade;
 import by.arbitrage.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -13,14 +12,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Scope(value = "singleton")
 public class UserContext
 {
-
 	@Autowired
 	private UserService service;
 
 	public UserContext()
 	{
 	}
-
 
 	public String getCurrentUserName()
 	{
@@ -32,9 +29,5 @@ public class UserContext
 		return service.findUserByLogin(getCurrentUserName());
 	}
 
-	private EntryFacade getEntryFacade()
-	{
-		return EntryFacade.getInstance();
-	}
 
 }

@@ -1,6 +1,7 @@
 package by.arbitrage.service;
 
-import by.arbitrage.entity.site.SiteDTO;
+import by.arbitrage.entity.site.dto.NewSiteDTO;
+import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.repository.SiteRepository;
@@ -58,16 +59,16 @@ public class SiteService
 	}
 
 	@Transactional
-	public SiteEntity saveSite(String userName, SiteDTO siteDTO)
+	public SiteEntity saveSite(String userName, NewSiteDTO siteDTO)
 	{
 		return repository.save(convertDTOtoEntity(userName, siteDTO));
 	}
 
 	@Transactional
-	public List<SiteEntity> saveSites(String userName, List<SiteDTO> siteDTOList)
+	public List<SiteEntity> saveSites(String userName, List<NewSiteDTO> siteDTOList)
 	{
 		List<SiteEntity> entityList = new ArrayList<>();
-		for (SiteDTO siteDTO : siteDTOList)
+		for (NewSiteDTO siteDTO : siteDTOList)
 		{
 			entityList.add(convertDTOtoEntity(userName, siteDTO));
 		}
@@ -75,7 +76,7 @@ public class SiteService
 		return entityList;
 	}
 
-	public SiteEntity convertDTOtoEntity(String userName, SiteDTO siteDTO)
+	public SiteEntity convertDTOtoEntity(String userName, NewSiteDTO siteDTO)
 	{
 		SiteEntity entity = new SiteEntity();
 		entity.setUrl(siteDTO.getUrl());
