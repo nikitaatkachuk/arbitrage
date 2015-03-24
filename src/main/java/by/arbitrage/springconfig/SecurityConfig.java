@@ -1,6 +1,5 @@
 package by.arbitrage.springconfig;
 
-import by.arbitrage.service.user.impl.AjaxAuthenticationSuccessHandler;
 import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -58,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.loginProcessingUrl("/j_spring_security_check")
 				.usernameParameter("j_username")
 				.passwordParameter("j_password")
-				.successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
 				.loginPage("/login")
 				.permitAll()
 				.and()
