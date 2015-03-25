@@ -35,7 +35,7 @@ public class UserController
 
 	@RequestMapping( method = RequestMethod.POST, value = "/addSite")
 	public @ResponseBody
-	SiteDTO addSite(@RequestParam(value = "url") String newSiteURL)
+	SiteDTO addSiteForCurrentUser(@RequestParam(value = "url") String newSiteURL)
 	{
 		if(newSiteURL != null)
 		{

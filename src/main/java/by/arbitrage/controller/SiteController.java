@@ -5,8 +5,10 @@ import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.statistic.Statistic;
+import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.service.SiteService;
 import by.arbitrage.service.statistic.StatisticService;
+import by.arbitrage.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,10 @@ import java.util.List;
 public class SiteController
 {
 	@Autowired
-	private SiteService service;
+	private SiteService siteService;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private UserContext userContext;
@@ -34,10 +39,9 @@ public class SiteController
 
 
 	@RequestMapping(method = RequestMethod.GET, value = "/site/{id}")
-	//@ModelAttribute("currentSite")
 	public String getSite(Model model , @PathVariable String id)
 	{
-		SiteEntity currentSite = service.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
+		SiteEntity currentSite = siteService.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
 		model.addAttribute("currentSite", currentSite);
 		getStatistic(currentSite);
 		return "site";
@@ -46,7 +50,7 @@ public class SiteController
 	@ModelAttribute("allSites")
 	public List<SiteEntity> allSites()
 	{
-		return service.getAllSites();
+		return siteService.getAllSites();
 	}
 
 	@ModelAttribute("statistic")
@@ -58,6 +62,8 @@ public class SiteController
 		}
 		return null;
 	}
+
+
 
 	//@RequestMapping(method = RequestMethod.GET, value = "site/")
 	public String generateScript()
@@ -72,7 +78,7 @@ public class SiteController
 
 	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<NewSiteDTO> sites)
 	{
-		return SiteDTO.convertEntityList(service.saveSites(principal.getName(), sites));
+		return SiteDTO.convertEntityList(siteService.saveSites(principal.getName(), sites));
 	}
 
 }

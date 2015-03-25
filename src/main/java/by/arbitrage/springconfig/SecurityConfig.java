@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/resources/**").permitAll()
-				.antMatchers(HttpMethod.POST, "/addSite").permitAll()
+				.antMatchers(HttpMethod.POST, "/addSite").authenticated()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
