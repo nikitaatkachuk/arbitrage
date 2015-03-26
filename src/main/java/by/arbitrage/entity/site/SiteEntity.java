@@ -21,6 +21,8 @@ public class SiteEntity implements Site
 
 	private String guid;
 
+	private String script;
+
 	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
 	private List<UserEntity> users;
 
@@ -65,7 +67,6 @@ public class SiteEntity implements Site
 		this.guid = guid;
 	}
 
-	@Override
 	public List<UserEntity> getUsers()
 	{
 		return users;
@@ -74,5 +75,16 @@ public class SiteEntity implements Site
 	public void setUsers(List<UserEntity> users)
 	{
 		this.users = users;
+	}
+
+	@Override
+	public String getScript()
+	{
+		return script;
+	}
+
+	public void setScript(String script)
+	{
+		this.script = script;
 	}
 }

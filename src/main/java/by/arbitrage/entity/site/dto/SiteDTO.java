@@ -1,6 +1,8 @@
 package by.arbitrage.entity.site.dto;
 
+import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.entity.user.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +10,13 @@ import java.util.List;
 /**
  * Created by Nikita Tkachuk
  */
-public class SiteDTO
+public class SiteDTO implements Site
 {
 	private Long id;
 
 	private String url;
+
+	private String script;
 
 	public SiteDTO()
 	{
@@ -64,5 +68,16 @@ public class SiteDTO
 	public void setUrl(String url)
 	{
 		this.url = url;
+	}
+
+	@Override
+	public String getScript()
+	{
+		return script;
+	}
+
+	public void setScript(String script)
+	{
+		this.script = script;
 	}
 }
