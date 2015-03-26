@@ -39,7 +39,7 @@ function addSite()
         }),
         success: function(data) {
             closeAddSiteDialog();
-            $(".sites_table").append("<tr><td class='info'><a href= /site?id=" + data.id + ">" + data.url + "</a></td><td></td></tr>");
+            $(".sites_table").append("<tr><td class='info'><a href= /site/" + data.id + ">" + data.url + "</a></td><td></td></tr>");
         },
         error: function(xhr, status, error) {
             //var err = eval("(" + xhr.responseText + ")");
