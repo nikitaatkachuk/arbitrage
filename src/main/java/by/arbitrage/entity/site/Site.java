@@ -1,9 +1,6 @@
 package by.arbitrage.entity.site;
 
-import by.arbitrage.entity.user.User;
-import by.arbitrage.entity.user.UserEntity;
-
-import java.util.List;
+import by.arbitrage.entity.script.Script;
 
 /**
  * Created by Nikita Tkachuk
@@ -14,6 +11,6 @@ public interface Site
 
 	String getUrl();
 
-	String getScript();
+	Script getScript();
 
 }

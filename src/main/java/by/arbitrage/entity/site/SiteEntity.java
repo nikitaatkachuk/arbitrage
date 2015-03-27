@@ -1,9 +1,9 @@
 package by.arbitrage.entity.site;
 
+import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.user.UserEntity;
 
 import javax.persistence.*;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -21,7 +21,8 @@ public class SiteEntity implements Site
 
 	private String guid;
 
-	private String script;
+	@OneToOne
+	private Script script;
 
 	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
 	private List<UserEntity> users;
@@ -78,12 +79,12 @@ public class SiteEntity implements Site
 	}
 
 	@Override
-	public String getScript()
+	public Script getScript()
 	{
 		return script;
 	}
 
-	public void setScript(String script)
+	public void setScript(Script script)
 	{
 		this.script = script;
 	}

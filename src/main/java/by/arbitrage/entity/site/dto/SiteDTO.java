@@ -1,8 +1,8 @@
 package by.arbitrage.entity.site.dto;
 
+import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.SiteEntity;
-import by.arbitrage.entity.user.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class SiteDTO implements Site
 
 	private String url;
 
-	private String script;
+	private Script script;
 
 	public SiteDTO()
 	{
@@ -71,12 +71,12 @@ public class SiteDTO implements Site
 	}
 
 	@Override
-	public String getScript()
+	public Script getScript()
 	{
 		return script;
 	}
 
-	public void setScript(String script)
+	public void setScript(Script script)
 	{
 		this.script = script;
 	}
