@@ -1,11 +1,11 @@
 .addSiteDialog {
-    position: absolute;
+/*    position: absolute;
     border-radius: 5px;
     background: #fff;
     display: none;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+    z-index: 9999999;*/
     font-family: Arial, sans-serif;
-    z-index: 9999999;
     font-size: 14px;
 }
 
@@ -42,12 +42,12 @@
     border-bottom-right-radius: 5px;
 }
 
-#blackout {
-    background: rgba(0,0,0,0.3);
-    position: absolute;
-    top: 0;
-    overflow: hidden;
-    z-index: 999999;
-    left: 0;
-    display: none;
-}
+/*#blackout {*/
+    /*background: rgba(0,0,0,0.3);*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*overflow: hidden;*/
+    /*z-index: 999999;*/
+    /*left: 0;*/
+    /*display: none;*/
+/*}*/

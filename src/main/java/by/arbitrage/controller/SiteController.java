@@ -42,7 +42,8 @@ public class SiteController
 	public String getSite(Model model , @PathVariable String id)
 	{
 		SiteEntity currentSite = siteService.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
-		model.addAttribute("currentSite", currentSite);
+		SiteDTO dto = SiteDTO.convertFromEntity(currentSite);
+		model.addAttribute("currentSite", dto);
 		getStatistic(currentSite);
 		return "site";
 	}

@@ -4,7 +4,17 @@
       <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.css}" th:rel="stylesheet"/>
       <link rel="stylesheet" th:href="@{/resources/css/main.css}" th:rel="stylesheet"/>
       <script type="text/javascript" th:src="@{/resources/js/jquery.js}" />
+      <script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}"/>
       <script type="text/javascript"  th:src="@{/resources/js/main.js}" />
+      <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//localhost:8080/resources/js/anal.js','ga');
+
+          ga();
+         // ga('send', 'pageview');
+      </script>
     <title>Arbitrage</title>
   </head>
   <body>
@@ -18,27 +28,31 @@
       <h2>Your sites:</h2>
       <table th:unless="${#lists.isEmpty(currentUserSites)}" class="table table-hover table-bordered">
           <thead>
-              <tr class="success">
-                  <td>URL</td>
-                  <td>Has been added:</td>
-              </tr>
           </thead>
           <tbody class="sites_table">
               <tr th:each="site : ${currentUserSites}" class="info">
-                  <td><a th:text="${site.url}" th:href="@{/site/(id=${site.id})}"></a></td>
-                  <!--<td th:text="${cont.firstname}">The last name</td>-->
+                  <td><a th:text="${site.url}" th:href="@{/site/} + ${site.id}"></a></td>
+                  <td><button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" data-placement="right" title="Remove site">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  </button></td>
               </tr>
           </tbody>
       </table>
-      <button class="btn btn-primary" onclick="showAddSiteDialog()">Add site</button>
-      <div class="addSiteDialog">
-          <div class="close" onclick="closeAddSiteDialog()">X</div>
-          <div class="top">
-              <h2>Write site url</h2>
-          </div>
-          <div class="bottom">
-              <input type="text" id="newSiteURL" placeholder="URL"/>
-              <button class="btn btn-primary" onclick="addSite()">Add site</button>
+      <button class="btn btn-primary"  data-toggle="modal" data-target=".addSiteDialog">Add site</button>
+      <div class="modal fade addSiteDialog" tabindex="-1" role="dialog"   aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                  <div class="model-header">
+                      <div class="top">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                        <h2 class="modal-title">Write site url</h2>
+                      </div>
+                  </div>
+                  <div class="bottom">
+                      <input type="text" id="newSiteURL" placeholder="URL"/>
+                      <button class="btn btn-primary" onclick="addSite()">Add site</button>
+                  </div>
+              </div>
           </div>
       </div>
   </div>

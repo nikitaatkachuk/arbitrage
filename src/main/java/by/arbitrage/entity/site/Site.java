@@ -11,6 +11,4 @@ public interface Site
 
 	String getUrl();
 
-	Script getScript();
-
 }

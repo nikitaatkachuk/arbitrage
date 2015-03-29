@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Nikita Tkachuk
  */
-@RequestMapping("sitestat")
+//@RequestMapping(value = "sitestat")
 @RestController
 public class SiteStatisticRestController
 {
@@ -27,16 +27,19 @@ public class SiteStatisticRestController
 	@Autowired
 	private StatisticService statisticService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public void incrementSiteStat(@RequestParam(value = "siteGuid", required = true) String siteGuid,
-	                               @RequestParam(value = "userGuid", required = true)String userGuid,
+	@RequestMapping(method = RequestMethod.POST, value = "/sitestat")
+	public void incrementSiteStat(@RequestParam(value = "siteGuid", required = false) String siteGuid,
+	                               @RequestParam(value = "userGuid", required = false)String userGuid,
 									@RequestParam(value = "isCookie", required = false, defaultValue = "0") boolean isCookie)
 	{
 		try
 		{
 			UserEntity user = userService.findUserByGiud(userGuid);
 			SiteEntity site = siteService.findSiteByGuid(siteGuid);
-			statisticService.registerVisit(site, user, isCookie);
+			if(site != null && user != null)
+			{
+				statisticService.registerVisit(site, user, isCookie);
+			}
 		}
 		catch (Exception e)
 		{

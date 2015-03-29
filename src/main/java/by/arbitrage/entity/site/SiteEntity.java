@@ -21,7 +21,8 @@ public class SiteEntity implements Site
 
 	private String guid;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "script_fk")
 	private Script script;
 
 	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
@@ -78,7 +79,6 @@ public class SiteEntity implements Site
 		this.users = users;
 	}
 
-	@Override
 	public Script getScript()
 	{
 		return script;

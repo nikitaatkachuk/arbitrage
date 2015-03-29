@@ -37,6 +37,13 @@ public class MainController
 		return "index";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/index")
+	public String indexPage()
+	{
+		return "index";
+	}
+
+
 	@ModelAttribute("currentUserSites")
 	public List<SiteDTO> currentUserSites()
 	{

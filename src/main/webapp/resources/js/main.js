@@ -2,25 +2,6 @@
  * Created by Nikita Tkachuk on 24.02.2015.
  */
 
-function showScript()
-{
-    var elem=document.getElementById("toChange");
-    var x=0;
-    if(x==1)
-        clearInterval(t);
-    x += 0.05;
-    elem.style.opacity = x;
-    elem.style.filter="alpha(opacity=" + (x * 100) + ")";
-    var t = setInterval(moreVisible, 25);
-
-}
-function showAddSiteDialog() {
-    $(function () {
-        $('.addSiteDialog').show();
-        $('html,body').css('overflow', 'hidden');
-        //$(".addSiteDialog").dialog();
-    });
-}
 
 function closeAddSiteDialog()
 {

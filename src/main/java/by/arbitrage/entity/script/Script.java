@@ -7,7 +7,7 @@ import javax.persistence.Id;
 /**
  * Created by Nikita Tkachuk
  */
-@Entity
+@Entity(name = "script")
 public class Script
 {
 	@Id

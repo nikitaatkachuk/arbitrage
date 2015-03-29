@@ -20,7 +20,7 @@ public final class ScriptGenerator
 		{
 			while (reader.ready())
 			{
-				builder.append(reader.readLine()).append("\n");
+				builder.append(reader.readLine());
 			}
 			return builder.toString().replaceAll(guidMarker, siteGuid);
 		}

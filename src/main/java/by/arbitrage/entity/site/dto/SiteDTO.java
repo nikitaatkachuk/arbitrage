@@ -16,7 +16,7 @@ public class SiteDTO implements Site
 
 	private String url;
 
-	private Script script;
+	private String script;
 
 	public SiteDTO()
 	{
@@ -37,7 +37,9 @@ public class SiteDTO implements Site
 
 	public static SiteDTO convertFromEntity(SiteEntity entity)
 	{
-		return new SiteDTO(entity.getId(), entity.getUrl());
+		SiteDTO siteDTO = new SiteDTO(entity.getId(), entity.getUrl());
+		siteDTO.setScript(entity.getScript().getUserScript());
+		return siteDTO;
 	}
 
 	public static List<SiteDTO> convertEntityList(List<SiteEntity> entityList)
@@ -70,13 +72,12 @@ public class SiteDTO implements Site
 		this.url = url;
 	}
 
-	@Override
-	public Script getScript()
+	public String getScript()
 	{
 		return script;
 	}
 
-	public void setScript(Script script)
+	public void setScript(String script)
 	{
 		this.script = script;
 	}
