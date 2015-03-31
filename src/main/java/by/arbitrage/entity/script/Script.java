@@ -2,6 +2,7 @@ package by.arbitrage.entity.script;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 @Entity(name = "script")
 public class Script
 {
-	@Id
+	@Id @GeneratedValue
 	private Long id;
 
 	@Column(name = "script")

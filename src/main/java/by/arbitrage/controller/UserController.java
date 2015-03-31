@@ -41,7 +41,7 @@ public class UserController
 		{
 			NewSiteDTO dto = new NewSiteDTO(newSiteURL);
 			UserEntity currentUser = userContext.getCurrentUser();
-			SiteEntity site = siteService.saveSite(currentUser.getLogin(), dto);
+			SiteEntity site = siteService.saveSiteByDTO(currentUser, dto);
 			currentUser.addSite(site);
 			userService.save(currentUser);
 			return SiteDTO.convertFromEntity(site);

@@ -5,7 +5,6 @@ import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.statistic.Statistic;
-import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.service.SiteService;
 import by.arbitrage.service.statistic.StatisticService;
 import by.arbitrage.service.user.UserService;
@@ -77,9 +76,9 @@ public class SiteController
 		return SiteDTO.convertEntityList(userContext.getCurrentUser().getSites());
 	}
 
-	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<NewSiteDTO> sites)
+/*	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<NewSiteDTO> sites)
 	{
-		return SiteDTO.convertEntityList(siteService.saveSites(principal.getName(), sites));
-	}
+		return SiteDTO.convertEntityList(siteService.saveSitesByDtoList(principal.getName(), sites));
+	}*/
 
 }
