@@ -13,16 +13,16 @@ public class StatisticEntity implements Statistic
 {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long id;
 
-	@Column(name = "firstVisits")
+	@Column(name = "firstVisits", nullable = false)
 	private Integer firstVisits;
 
-	@Column(name = "secondVisits")
+	@Column(name = "secondVisits", nullable = false)
 	private Integer secondVisits;
 
-	@Column(name = "orderCount")
+	@Column(name = "orderCount", nullable = false)
 	private Integer orderCount;
 
 	@OneToOne

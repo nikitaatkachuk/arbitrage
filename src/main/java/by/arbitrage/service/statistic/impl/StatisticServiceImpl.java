@@ -45,7 +45,7 @@ public class StatisticServiceImpl implements StatisticService
 			}
 			else
 			{
-				statistic.setFirstVisits(statistic.getSecondVisits() + 1);
+				statistic.setFirstVisits(statistic.getFirstVisits() + 1);
 			}
 		}
 		else
@@ -53,6 +53,8 @@ public class StatisticServiceImpl implements StatisticService
 			statistic = new StatisticEntity();
 			statistic.setSiteEntity(site);
 			statistic.setUser(user);
+			statistic.setSecondVisits(0);
+			statistic.setOrderCount(0);
 			statistic.setFirstVisits(1);
 		}
 		statisticRepository.save(statistic);

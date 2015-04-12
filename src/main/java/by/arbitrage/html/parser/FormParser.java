@@ -20,8 +20,14 @@ public class FormParser
 	public static Collection<UserSiteForm> getSiteFormsByUrl(String url) throws IOException
 	{
 		Collection<UserSiteForm> result = new HashSet<>();
+		String httpPrefix = "http://";
+		if(!url.startsWith(httpPrefix))
+		{
+			url = httpPrefix + url;
+		}
 		Document document = Jsoup.connect(url).get();
-		Elements elements = document.getElementsByTag("form");
+		String tagName = "form";
+		Elements elements = document.getElementsByTag(tagName);
 
 		for(Element element : elements)
 		{

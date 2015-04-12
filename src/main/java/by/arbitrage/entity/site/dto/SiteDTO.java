@@ -64,6 +64,10 @@ public class SiteDTO implements Site
 
 	public String getUrl()
 	{
+		if(url.startsWith("http"))
+		{
+			return url.replace("http://","");
+		}
 		return url;
 	}
 

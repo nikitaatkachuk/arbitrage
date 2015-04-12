@@ -47,6 +47,9 @@ public class SiteController
 		return "site";
 	}
 
+	@RequestMapping(method = RequestMethod.DELETE, value = "/site/{id}")
+	//public void deleteSite()
+
 	@ModelAttribute("allSites")
 	public List<SiteEntity> allSites()
 	{
