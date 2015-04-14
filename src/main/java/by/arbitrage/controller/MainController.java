@@ -1,6 +1,8 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
+import by.arbitrage.converter.SiteConverter;
+import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.ErrorMessage;
 import by.arbitrage.service.SiteService;
@@ -31,6 +33,9 @@ public class MainController
 	@Autowired
 	private RequestMappingHandlerAdapter adapter;
 
+	@Autowired
+	private SiteConverter siteConverter;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String login()
 	{
@@ -47,7 +52,13 @@ public class MainController
 	@ModelAttribute("currentUserSites")
 	public List<SiteDTO> currentUserSites()
 	{
-		return SiteDTO.convertEntityList(userContext.getCurrentUser().getSites());
+		List<SiteDTO> result = new ArrayList<>();
+		List<SiteEntity> sites =  userContext.getCurrentUser().getSites();
+		for(SiteEntity siteEntity : sites)
+		{
+			result.add(siteConverter.convertEntityToDTO(siteEntity ));
+		}
+		return result;
 	}
 
 

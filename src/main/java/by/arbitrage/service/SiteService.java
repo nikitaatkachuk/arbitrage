@@ -2,7 +2,6 @@ package by.arbitrage.service;
 
 import by.arbitrage.converter.SiteConverter;
 import by.arbitrage.entity.script.Script;
-import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.user.User;

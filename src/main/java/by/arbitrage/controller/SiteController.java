@@ -2,10 +2,8 @@ package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
 import by.arbitrage.converter.SiteConverter;
-import by.arbitrage.entity.site.Site;
-import by.arbitrage.entity.site.dto.NewSiteDTO;
-import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.statistic.Statistic;
 import by.arbitrage.service.SiteService;
 import by.arbitrage.service.statistic.StatisticService;
@@ -13,9 +11,11 @@ import by.arbitrage.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
