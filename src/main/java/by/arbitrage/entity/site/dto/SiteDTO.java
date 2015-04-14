@@ -40,24 +40,6 @@ public class SiteDTO implements Site
 		this.url = url;
 	}
 
-	public static SiteDTO convertFromEntity(SiteEntity entity)
-	{
-		SiteDTO siteDTO = new SiteDTO(entity.getId(), entity.getUrl());
-		siteDTO.setScript(entity.getScript().getUserScript());
-		siteDTO.setForms((List<UserSiteForm>) entity.getSiteForms());
-		return siteDTO;
-	}
-
-	public static List<SiteDTO> convertEntityList(List<SiteEntity> entityList)
-	{
-		List<SiteDTO> siteDTOList = new ArrayList<>();
-		for (SiteEntity entity : entityList)
-		{
-			siteDTOList.add(convertFromEntity(entity));
-		}
-		return siteDTOList;
-	}
-
 	public Long getId()
 	{
 		return id;

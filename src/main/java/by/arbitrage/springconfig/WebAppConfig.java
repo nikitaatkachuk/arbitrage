@@ -1,6 +1,7 @@
 package by.arbitrage.springconfig;
 
 import by.arbitrage.context.UserContext;
+import by.arbitrage.converter.SiteConverter;
 import by.arbitrage.service.user.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -86,9 +87,14 @@ public class WebAppConfig extends WebMvcConfigurerAdapter
 	@Bean
 	public UserContext userContext()
 	{
-		UserContext context = new UserContext();
 		//context.setAuthentication();
-		return context;
+		return new UserContext();
+	}
+
+	@Bean
+	public SiteConverter siteConverter()
+	{
+		return new SiteConverter();
 	}
 
 	/*@Bean

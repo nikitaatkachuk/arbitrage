@@ -1,6 +1,8 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
+import by.arbitrage.converter.SiteConverter;
+import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +33,9 @@ public class SiteController
 	private UserService userService;
 
 	@Autowired
+	private SiteConverter siteConverter;
+
+	@Autowired
 	private UserContext userContext;
 
 	@Autowired
@@ -41,7 +47,7 @@ public class SiteController
 	public String getSite(Model model , @PathVariable String id)
 	{
 		SiteEntity currentSite = siteService.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
-		SiteDTO dto = SiteDTO.convertFromEntity(currentSite);
+		SiteDTO dto = siteConverter.convertEntityToDTO(currentSite);
 		model.addAttribute("currentSite", dto);
 		getStatistic(currentSite);
 
@@ -78,14 +84,15 @@ public class SiteController
 		return null;
 	}
 
-	private void createScriptBuilder()
-	{
-
-	}
-
 	public List<SiteDTO> currentUserSites()
 	{
-		return SiteDTO.convertEntityList(userContext.getCurrentUser().getSites());
+		List<SiteDTO> result = new ArrayList<>();
+		List<SiteEntity> sites =  userContext.getCurrentUser().getSites();
+		for(SiteEntity siteEntity : sites)
+		{
+			result.add(siteConverter.convertEntityToDTO(siteEntity ));
+		}
+		return result;
 	}
 
 /*	public List<SiteDTO> saveSites(Principal principal, @RequestBody List<NewSiteDTO> sites)

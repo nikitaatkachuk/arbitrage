@@ -1,4 +1,4 @@
-package by.arbitrage.utils;
+package by.arbitrage.converter;
 
 /**
  * Created by Nikita Tkachuk

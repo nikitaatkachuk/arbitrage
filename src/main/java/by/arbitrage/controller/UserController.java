@@ -1,6 +1,7 @@
 package by.arbitrage.controller;
 
 import by.arbitrage.context.UserContext;
+import by.arbitrage.converter.SiteConverter;
 import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
@@ -25,6 +26,8 @@ public class UserController
 	private UserContext userContext;
 	@Autowired
 	private SiteService siteService;
+	@Autowired
+	private SiteConverter siteConverter;
 
 
 	public @ResponseBody UserEntity get(@RequestBody UserEntity entity)
@@ -39,12 +42,12 @@ public class UserController
 	{
 		if(newSiteURL != null)
 		{
-			NewSiteDTO dto = new NewSiteDTO(newSiteURL);
+			SiteDTO dto = new SiteDTO(newSiteURL);
 			UserEntity currentUser = userContext.getCurrentUser();
-			SiteEntity site = siteService.saveSiteByDTO(currentUser, dto);
+			SiteEntity site = siteService.saveSiteByDTO(dto, currentUser);
 			currentUser.addSite(site);
 			userService.save(currentUser);
-			return SiteDTO.convertFromEntity(site);
+			return siteConverter.convertEntityToDTO(site);
 		}
 		else
 		{

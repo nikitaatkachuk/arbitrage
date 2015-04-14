@@ -1,8 +1,10 @@
 package by.arbitrage.service;
 
+import by.arbitrage.converter.SiteConverter;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.site.dto.NewSiteDTO;
 import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.user.User;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.html.UserSiteForm;
@@ -34,6 +36,9 @@ public class SiteService
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private SiteConverter converter;
 
 	public List<SiteEntity> getAllSites()
 	{
@@ -67,44 +72,22 @@ public class SiteService
 	}
 
 	@Transactional
-	public SiteEntity saveSiteByDTO(UserEntity user, NewSiteDTO siteDTO)
+	public SiteEntity saveSiteByDTO(SiteDTO siteDTO, UserEntity user)
 	{
-		return repository.save(convertDtoToEntity(user, siteDTO));
+		return repository.save(converter.convertDTOToEntity(siteDTO, user));
 	}
 
 	@Transactional
-	public List<SiteEntity> saveSitesByDtoList(UserEntity user, List<NewSiteDTO> siteDTOList)
+	public List<SiteEntity> saveSitesByDtoList(UserEntity user, List<SiteDTO> siteDTOList)
 	{
 		List<SiteEntity> entityList = new ArrayList<>();
-		for (NewSiteDTO siteDTO : siteDTOList)
+		for (SiteDTO siteDTO : siteDTOList)
 		{
-			entityList.add(convertDtoToEntity(user, siteDTO));
+			entityList.add(converter.convertDTOToEntity(siteDTO));
 		}
 		repository.save(entityList);
 		return entityList;
 	}
 
-	public SiteEntity convertDtoToEntity(UserEntity user, NewSiteDTO siteDTO)
-	{
-		SiteEntity entity = new SiteEntity();
-		entity.setUrl(siteDTO.getUrl());
-		entity.setGuid(GUIDGenerator.randomGUID());
-		entity.setUsers(Collections.singletonList(user));
-		entity.setScript(new Script("Empty Script"));
-		entity.setSiteForms(buildSiteFormsCollection(siteDTO.getUrl()));
-		return entity;
-	}
 
-	private Collection<UserSiteForm> buildSiteFormsCollection(String url)
-	{
-		try
-		{
-			return FormParser.getSiteFormsByUrl(url);
-		}
-		catch (IOException e)
-		{
-			LOGGER.warn("Could not parsed site by url " + url);
-		}
-		return Collections.emptyList();
-	}
 }

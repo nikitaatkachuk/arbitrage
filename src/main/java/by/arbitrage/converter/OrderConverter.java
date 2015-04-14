@@ -1,8 +1,7 @@
-package by.arbitrage.entity.order.converter;
+package by.arbitrage.converter;
 
 import by.arbitrage.entity.order.dto.OrderDTO;
 import by.arbitrage.entity.order.impl.OrderEntity;
-import by.arbitrage.utils.GenericConverter;
 
 /**
  * Created by Nikita Tkachuk
