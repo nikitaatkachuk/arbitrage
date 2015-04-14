@@ -3,6 +3,7 @@ package by.arbitrage.entity.site.dto;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.SiteEntity;
+import by.arbitrage.html.UserSiteForm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,10 @@ public class SiteDTO implements Site
 	private String url;
 
 	private String script;
+
+	private List<UserSiteForm> forms;
+
+
 
 	public SiteDTO()
 	{
@@ -39,6 +44,7 @@ public class SiteDTO implements Site
 	{
 		SiteDTO siteDTO = new SiteDTO(entity.getId(), entity.getUrl());
 		siteDTO.setScript(entity.getScript().getUserScript());
+		siteDTO.setForms((List<UserSiteForm>) entity.getSiteForms());
 		return siteDTO;
 	}
 
@@ -84,5 +90,15 @@ public class SiteDTO implements Site
 	public void setScript(String script)
 	{
 		this.script = script;
+	}
+
+	public List<UserSiteForm> getForms()
+	{
+		return forms;
+	}
+
+	public void setForms(List<UserSiteForm> forms)
+	{
+		this.forms = forms;
 	}
 }

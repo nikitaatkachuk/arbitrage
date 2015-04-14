@@ -44,11 +44,15 @@ public class SiteController
 		SiteDTO dto = SiteDTO.convertFromEntity(currentSite);
 		model.addAttribute("currentSite", dto);
 		getStatistic(currentSite);
+
 		return "site";
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/site/{id}")
-	//public void deleteSite()
+	public void deleteSite(@PathVariable String id)
+	{
+
+	}
 
 	@ModelAttribute("allSites")
 	public List<SiteEntity> allSites()
@@ -57,7 +61,7 @@ public class SiteController
 	}
 
 	@ModelAttribute("statistic")
-	public Statistic getStatistic(SiteEntity site)
+	private Statistic getStatistic(SiteEntity site)
 	{
 		if(site != null)
 		{
@@ -68,10 +72,15 @@ public class SiteController
 
 
 
-	//@RequestMapping(method = RequestMethod.GET, value = "site/")
+	@RequestMapping(method = RequestMethod.POST, value = "site/generateScript")
 	public String generateScript()
 	{
 		return null;
+	}
+
+	private void createScriptBuilder()
+	{
+
 	}
 
 	public List<SiteDTO> currentUserSites()

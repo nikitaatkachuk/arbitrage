@@ -1,5 +1,6 @@
 package by.arbitrage.entity.site;
 
+import by.arbitrage.entity.order.impl.OrderEntity;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.html.UserSiteForm;
@@ -35,6 +36,10 @@ public class SiteEntity implements Site
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "site_fk", nullable = false)
 	private Collection<UserSiteForm> siteForms;
+
+	/*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "site_fk", nullable = false)
+	private Collection<OrderEntity> orders;*/
 
 	public SiteEntity()
 	{

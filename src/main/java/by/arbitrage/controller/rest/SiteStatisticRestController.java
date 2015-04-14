@@ -27,10 +27,10 @@ public class SiteStatisticRestController
 	@Autowired
 	private StatisticService statisticService;
 
-	@RequestMapping(method = RequestMethod.POST, value = "/sitestat")
-	public void incrementSiteStat(@RequestParam(value = "siteGuid", required = false) String siteGuid,
-	                               @RequestParam(value = "userGuid", required = false)String userGuid,
-									@RequestParam(value = "isCookie", required = false, defaultValue = "0") boolean isCookie)
+	@RequestMapping(method = RequestMethod.POST, value = "/sitevisit")
+	public void registerVisit(@RequestParam(value = "siteGuid", required = false) String siteGuid,
+	                          @RequestParam(value = "userGuid", required = false) String userGuid,
+	                          @RequestParam(value = "isCookie", required = false, defaultValue = "0") boolean isCookie)
 	{
 		try
 		{
@@ -46,4 +46,13 @@ public class SiteStatisticRestController
 
 		}
 	}
+
+	//TODO: add implementation
+	@RequestMapping(method = RequestMethod.POST, value = "/siteorder")
+	public void registerOrder()
+	{
+
+	}
+
+
 }

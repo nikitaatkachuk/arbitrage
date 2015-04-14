@@ -18,7 +18,7 @@ public class UserSiteForm
 
 	protected String formId;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "form_classes", joinColumns = @JoinColumn(name = "user_form_id"))
 	@Column(name = "form_class")
 	protected Set<String> formClasses;
