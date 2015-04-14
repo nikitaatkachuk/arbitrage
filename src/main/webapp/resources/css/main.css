@@ -1,4 +1,4 @@
-.addSiteDialog {
+.defaultPopoutDialog {
 /*    position: absolute;
     border-radius: 5px;
     background: #fff;
@@ -9,7 +9,7 @@
     font-size: 14px;
 }
 
-.addSiteDialog .close {
+.defaultPopoutDialog .close {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -21,20 +21,20 @@
     font-size: 20px;
 }
 
-.addSiteDialog .close:hover {
+.defaultPopoutDialog .close:hover {
     color: #000;
 }
 
-.addSiteDialog h2 {
+.defaultPopoutDialog h2 {
     padding: 0;
     margin: 0;
     font-size: 18px;
 }
-.addSiteDialog .top {
+.defaultPopoutDialog .top {
     padding: 20px;
 }
 
-.addSiteDialog .bottom {
+.defaultPopoutDialog .bottom {
     background: #eee;
     border-top: 1px solid #e5e5e5;
     padding: 20px;

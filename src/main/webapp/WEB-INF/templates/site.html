@@ -18,15 +18,9 @@
     <div class="jumbotron">
 <h2 th:text="${currentSite.getUrl()}"></h2>
 
-        <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Script</button>
-        <button class="btn btn-link">Statistic</button>
-        <div class="collapse" id="collapseExample">
-            <div class="well">
-               <div th:text="${currentSite.getScript()}"></div>
-            </div>
-        </div>
+
         <div th:if="${statistic} != null">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered sites_table">
                 <thead>
                     <tr>
                         <td>
@@ -48,6 +42,34 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Show script</button>
+        <button class="btn btn-primary"  data-toggle="modal" data-target=".defaultPopoutDialog">Build script</button>
+        <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog"   aria-hidden="true">
+            <div class="modal-dialog modal-sm ">
+                <div class="modal-content">
+                    <div class="model-header">
+                        <div class="top">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                            <h2 class="modal-title"> Build script</h2>
+                        </div>
+                    </div>
+                    <h2>Select forms for orders</h2>
+                    <div class="bottom ">
+                        <ul class="dropdown-menu btn-group" role="menu" aria-labelledby="dropdownMenu" >
+                            <li th:each="form : ${currentSite.forms}">
+                                <input type="checkbox" th:text="${form.formId}" th:value="${form.formId}"/>
+                            </li>
+                        </ul>
+                        <button class="btn btn-primary" >Generate script</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="well">
+                <div th:text="${currentSite.getScript()}"></div>
+            </div>
         </div>
     </div>
     </div>
