@@ -1,12 +1,60 @@
+
 (function () {
 
+    var iterator,
+        asyncTracker,
+        win = window,
+        doc = document,
+        math = Math,
+        decodeWrapper = window.decodeURIComponent,
+        encodeWrapper = window.encodeURIComponent;
+
+
+    if (typeof _paq !== 'object') {
+        _paq = [];
+    }
+
+    function isObject(property) {
+        return typeof property === 'object';
+    }
+
+    function isString(property) {
+        return typeof property === 'string' || property instanceof String;
+    }
+
+    function apply() {
+        var i, f, parameterArray;
+
+        for (i = 0; i < arguments.length; i += 1) {
+            parameterArray = arguments[i];
+            f = parameterArray.shift();
+
+            if (isString(f)) {
+                asyncTracker[f].apply(asyncTracker, parameterArray);
+            } else {
+                f.apply(asyncTracker, parameterArray);
+            }
+        }
+    }
+
+    for (iterator = 0; iterator < _paq.length; iterator++) {
+        var methodName = _paq[iterator][0];
+        alert(methodName);
+        if (applyFirst[methodName]) {
+            apply(_paq[iterator]);
+            delete _paq[iterator];
+
+            if (applyFirst[methodName] > 1) {
+                if (console !== undefined && console && console.error) {
+                    console.error('The method ' + methodName + ' is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Piwik trackers documentation: http://developer.piwik.org/guides/tracking-javascript-guide#multiple-piwik-trackers');
+                }
+            }
+
+            applyFirst[methodName]++;
+        }
+    }
     function Tracker(url, siteGuid) {
         var
-            win = window,
-            doc = document,
-            math = Math,
-            decodeWrapper = window.decodeURIComponent,
-            encodeWrapper = window.encodeURIComponent,
             configuredSiteGuid = siteGuid || '',
             visitorUUID = '';
 
@@ -208,6 +256,7 @@
             sendData: function(request, callback, fallbackToGet)
             {return sendXmlHttpRequest(request, callback, fallbackToGet)},
             url:parseGET()[namekey],
+            siteGuid:siteGuid,
             setCookie:function ()
             {
                 var utm = parseGET();
@@ -220,14 +269,14 @@
             }
         }
     }
-            var tracker = new Tracker(decodeURI(window.document.location.search), "opopo");
-    tracker.setCookie();
-    var cookieVisitorIdValues = tracker.getCookie();
-    var userGuid = cookieVisitorIdValues.userGuid;
-    alert(userGuid);
-    if(userGuid)
-    {
-        var json = {"siteGuid" : "11998d56-5f96-44b0-8dd1-22c2058272c2", "userGuid": userGuid, "isCookie" : "1"};
-    }
-    tracker.sendData(json, null, null);
+    new Tracker(decodeURI(window.document.location.search), "opopo");
+    //tracker.setCookie();
+    //var cookieVisitorIdValues = tracker.getCookie();
+    //var userGuid = cookieVisitorIdValues.userGuid;
+    //alert(userGuid);
+    //if(userGuid)
+    //{
+    //    var json = {"siteGuid" : "11998d56-5f96-44b0-8dd1-22c2058272c2", "userGuid": userGuid, "isCookie" : "1"};
+    //}
+    //tracker.sendData(json, null, null);
 })(window);
