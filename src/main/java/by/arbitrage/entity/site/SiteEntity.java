@@ -5,6 +5,7 @@ import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.html.UserSiteForm;
 import by.arbitrage.html.parser.FormParser;
+import by.arbitrage.html.render.PreviewBuilder;
 
 import javax.persistence.*;
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class SiteEntity implements Site
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "site_fk", nullable = false)
 	private Collection<UserSiteForm> siteForms;
+
+	private String previewPath;
 
 	/*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "site_fk", nullable = false)
@@ -112,12 +115,27 @@ public class SiteEntity implements Site
 		this.siteForms = siteForms;
 	}
 
+
+	public String getPreviewPath()
+	{
+		return previewPath;
+	}
+	public void setPreviewPath(String previewPath)
+	{
+		this.previewPath = previewPath;
+	}
+
 	@PrePersist
-	private void updateForms() throws IOException
+	private void updateInformation() throws IOException
 	{
 		if(siteForms.isEmpty())
 		{
 			siteForms = FormParser.getSiteFormsByUrl(url);
 		}
+		if(previewPath == null || "".equals(previewPath))
+		{
+			previewPath = PreviewBuilder.buildPreview(url, guid);
+		}
 	}
+
 }

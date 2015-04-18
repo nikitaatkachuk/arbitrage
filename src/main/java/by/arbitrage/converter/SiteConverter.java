@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import by.arbitrage.html.render.PreviewBuilder;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -38,6 +39,7 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 		SiteDTO siteDTO = new SiteDTO(entity.getId(), entity.getUrl());
 		siteDTO.setScript(entity.getScript().getUserScript());
 		siteDTO.setForms((List<UserSiteForm>) entity.getSiteForms());
+		siteDTO.setPreviewPath(entity.getPreviewPath());
 		return siteDTO;
 	}
 
@@ -50,11 +52,21 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 	public SiteEntity convertDTOToEntity(SiteDTO siteDTO, UserEntity user)
 	{
 		SiteEntity entity = new SiteEntity();
-		entity.setUrl(siteDTO.getUrl());
-		entity.setGuid(GUIDGenerator.randomGUID());
+		String url = siteDTO.getUrl();
+		String guid = GUIDGenerator.randomGUID();
+		entity.setUrl(url);
+		entity.setGuid(guid);
+		if(siteDTO.getPreviewPath() == null)
+		{
+			entity.setPreviewPath(PreviewBuilder.buildPreview(url, guid));
+		}
+		else
+		{
+			entity.setPreviewPath(siteDTO.getPreviewPath());
+		}
 		entity.setUsers(Collections.singletonList(user));
 		entity.setScript(new Script("Empty Script"));
-		entity.setSiteForms(buildSiteFormsCollection(siteDTO.getUrl()));
+		entity.setSiteForms(buildSiteFormsCollection(url));
 		return entity;
 	}
 

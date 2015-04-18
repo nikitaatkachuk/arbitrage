@@ -13,7 +13,7 @@ function addSite()
     var siteUrl = $('#newSiteURL').val();
    // var json = {"url" : siteUrl } ;
     $.ajax({
-        url: '/user/addSite',
+        url: 'user/addSite',
         type: 'POST',
         data : ({
             url: siteUrl

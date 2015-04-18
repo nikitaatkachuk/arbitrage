@@ -19,6 +19,8 @@ public class SiteDTO implements Site
 
 	private String script;
 
+	private String previewPath;
+
 	private List<UserSiteForm> forms;
 
 
@@ -82,5 +84,15 @@ public class SiteDTO implements Site
 	public void setForms(List<UserSiteForm> forms)
 	{
 		this.forms = forms;
+	}
+
+	public String getPreviewPath()
+	{
+		return previewPath;
+	}
+
+	public void setPreviewPath(String previewPath)
+	{
+		this.previewPath = previewPath;
 	}
 }
