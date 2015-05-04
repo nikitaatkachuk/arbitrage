@@ -10,16 +10,12 @@ import by.arbitrage.html.UserSiteForm;
 import by.arbitrage.html.parser.FormParser;
 import by.arbitrage.repository.SiteRepository;
 import by.arbitrage.service.user.UserService;
-import by.arbitrage.utils.GUIDGenerator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -73,7 +69,7 @@ public class SiteService
 	@Transactional
 	public SiteEntity saveSiteByDTO(SiteDTO siteDTO, UserEntity user)
 	{
-		return repository.save(converter.convertDTOToEntity(siteDTO, user));
+		return repository.saveAndFlush(converter.convertDTOToEntity(siteDTO, user));
 	}
 
 	@Transactional
