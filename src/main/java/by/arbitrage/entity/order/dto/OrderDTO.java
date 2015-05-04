@@ -25,7 +25,7 @@ public class OrderDTO implements Order
 		this.orderData = orderData;
 	}
 
-	public void setSecondVisit(Boolean secondVisit)
+	public void setSecondVisit(boolean secondVisit)
 	{
 		this.secondVisit = secondVisit;
 	}
@@ -37,7 +37,7 @@ public class OrderDTO implements Order
 	}
 
 	@Override
-	public Boolean isSecondVisit()
+	public boolean isSecondVisit()
 	{
 		return secondVisit;
 	}

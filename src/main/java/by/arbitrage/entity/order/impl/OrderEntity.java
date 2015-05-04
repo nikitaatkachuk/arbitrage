@@ -2,25 +2,44 @@ package by.arbitrage.entity.order.impl;
 
 import by.arbitrage.entity.order.Order;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Nikita Tkachuk
  */
 @Entity
-@Table(name = "order")
+@Table(name = "site_orders")
 public class OrderEntity implements Order
 {
+	//@Column(name = "ID")
 	@Id
+	@GeneratedValue
 	private Long id;
 
+	@Column(name = "order_time")
 	private Long orderTime;
 
+	@Column(name = "order_data")
 	private String orderData;
 
-	private Boolean secondVisit;
+	@Column(name = "second_visit")
+	private boolean secondVisit;
+
+	public OrderEntity()
+	{
+	}
+
+	public OrderEntity(Order order)
+	{
+		this(order.getOrderTime(), order.getOrderData(), order.isSecondVisit());
+	}
+
+	public OrderEntity(Long orderTime, String orderData, Boolean secondVisit)
+	{
+		this.orderTime = orderTime;
+		this.orderData = orderData;
+		this.secondVisit = secondVisit;
+	}
 
 	public Long getId()
 	{
@@ -54,12 +73,12 @@ public class OrderEntity implements Order
 		this.orderData = orderData;
 	}
 
-	public Boolean isSecondVisit()
+	public boolean isSecondVisit()
 	{
 		return secondVisit;
 	}
 
-	public void setSecondVisit(Boolean secondVisit)
+	public void setSecondVisit(boolean secondVisit)
 	{
 		this.secondVisit = secondVisit;
 	}

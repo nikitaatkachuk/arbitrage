@@ -11,14 +11,13 @@ import javax.persistence.Id;
 @Entity(name = "script")
 public class Script
 {
-	private static final String GENERIC_SCRIPT = " <script>\n" +
-			"          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\n" +
-			"              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n" +
-			"                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n" +
-			"          })(window,document,'script','//localhost:8080/resources/js/anal.js','ga');\n" +
-			"\n" +
-			"          ga();\n" +
-			"         // ga('send', 'pageview');\n" +
+	private static final String GENERIC_SCRIPT = "<script>\n" +
+			"\tvar _paq = _paq || [];\n" +
+			"\t_paq.push(['trackPageView']);\n" +
+			"\t (function(){ var u=((\"https:\" == document.location.protocol) ? \"https://localhost:8080/resources/js/\" : \"http://localhost:8080/resources/js/\");\n" +
+			"          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript'; g.defer=true; g.async=true; g.src=u+'anal.js';\n" +
+			"    s.parentNode.insertBefore(g,s); })();\n" +
+			"          //ga('send', 'pageview');\n" +
 			"      </script>";
 
 	@Id @GeneratedValue

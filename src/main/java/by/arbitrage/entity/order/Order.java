@@ -9,7 +9,7 @@ public interface Order
 {
 	public Long getOrderTime();
 
-	public Boolean isSecondVisit();
+	public boolean isSecondVisit();
 
 	public String getOrderData();
 }
