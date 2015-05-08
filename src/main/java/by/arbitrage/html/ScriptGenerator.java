@@ -1,17 +1,18 @@
-package by.arbitrage.utils;
+package by.arbitrage.html;
 
 import java.io.*;
+import java.util.Map;
 
 /**
  * Created by Nikita Tkachuk
  */
 public final class ScriptGenerator
 {
-	public static void main(String[] args)
-	{
-		generateScript("sadad");
-	}
-	public static String generateScript(String siteGuid)
+//	public static void main(String[] args)
+//	{
+//		generateScript("sadad");
+//	}
+	public static String generateScript(Map<String, Object> parameters)
 	{
 		//TODO
 		StringBuilder builder = new StringBuilder();
@@ -22,7 +23,7 @@ public final class ScriptGenerator
 			{
 				builder.append(reader.readLine());
 			}
-			return builder.toString().replaceAll(guidMarker, siteGuid);
+			//return builder.toString().replaceAll(guidMarker, siteGuid);
 		}
 		catch (IOException e)
 		{

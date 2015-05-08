@@ -36,29 +36,41 @@
             }
         }
     }
-
-    for (iterator = 0; iterator < _paq.length; iterator++) {
-        var methodName = _paq[iterator][0];
-        alert(methodName);
-        if (applyFirst[methodName]) {
-            apply(_paq[iterator]);
-            delete _paq[iterator];
-
-            if (applyFirst[methodName] > 1) {
-                if (console !== undefined && console && console.error) {
-                    console.error('The method ' + methodName + ' is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Piwik trackers documentation: http://developer.piwik.org/guides/tracking-javascript-guide#multiple-piwik-trackers');
-                }
-            }
-
-            applyFirst[methodName]++;
-        }
-    }
-    function Tracker(url, siteGuid) {
+    var guid = _paq[0][0];
+    var form = _paq[1][0];
+    var tracker = new Tracker(decodeURI(win.document.url), guid);
+    tracker.buildListener(form);
+   // for (iterator = 0; iterator < _paq.length; iterator++) {
+   //      = _paq[iterator][0];
+        //if (applyFirst[methodName]) {
+        //    apply(_paq[iterator]);
+        //    delete _paq[iterator];
+        //
+        //    if (applyFirst[methodName] > 1) {
+        //        if (console !== undefined && console && console.error) {
+        //            console.error('The method ' + methodName + ' is registered more than once in "_paq" variable. Only the last call has an effect. Please have a look at the multiple Piwik trackers documentation: http://developer.piwik.org/guides/tracking-javascript-guide#multiple-piwik-trackers');
+        //        }
+        //    }
+        //
+        //    applyFirst[methodName]++;
+        //}
+   // }
+    function Tracker(url, siteGuid)
+    {
         var
             configuredSiteGuid = siteGuid || '',
             visitorUUID = '';
 
-        function loadVisitorIdCookie() {
+        function buildEventListener(formId)
+        {
+            document.getElementById(formId).onsubmit = function ()
+            {
+                alert("Ololo, you a genius");
+            }
+        }
+
+        function loadVisitorIdCookie()
+        {
             var now = new Date(),
                 nowTs = Math.round(now.getTime() / 1000),
                 visitorIdCookieName = getCookieName('id'),
@@ -240,7 +252,6 @@
                 }
             });
         }
-
         /*{
             var utm = parseGET();
             var value = utm[namekey];
@@ -266,10 +277,14 @@
             getCookie:function()
             {
                 return getValuesFromVisitorIdCookie();
+            },
+            buildListener:function(formId)
+            {
+                return buildEventListener(formId);
             }
         }
     }
-    new Tracker(decodeURI(window.document.location.search), "opopo");
+   // new Tracker(decodeURI(window.document.location.search), "opopo");
     //tracker.setCookie();
     //var cookieVisitorIdValues = tracker.getCookie();
     //var userGuid = cookieVisitorIdValues.userGuid;

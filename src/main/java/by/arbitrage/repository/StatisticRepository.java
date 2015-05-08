@@ -14,7 +14,7 @@ public interface StatisticRepository extends JpaRepository<StatisticEntity, Long
 {
 	StatisticEntity findBySiteEntityAndUser(SiteEntity site, UserEntity userEntity);
 
-	StatisticEntity findById(Long id);
+	StatisticEntity findByIdentity(Long id);
 
 	//void updateStat
 }

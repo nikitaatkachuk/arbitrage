@@ -21,6 +21,7 @@ public class FormParser
 	{
 		Collection<UserSiteForm> result = new HashSet<>();
 		String httpPrefix = "http://";
+		//String httpsPrefix = "https://";
 		if(!url.startsWith(httpPrefix))
 		{
 			url = httpPrefix + url;

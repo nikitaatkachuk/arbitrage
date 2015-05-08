@@ -1,5 +1,6 @@
 package by.arbitrage.entity.site;
 
+import by.arbitrage.entity.GenericEntityImpl;
 import by.arbitrage.entity.order.impl.OrderEntity;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.user.UserEntity;
@@ -17,12 +18,8 @@ import java.util.List;
  */
 @Entity
 @Table(name = "site")
-public class SiteEntity implements Site
+public class SiteEntity extends GenericEntityImpl implements Site
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
 	private String url;
 
 	private String guid;
@@ -51,17 +48,6 @@ public class SiteEntity implements Site
 	public SiteEntity(String url)
 	{
 		this.url = url;
-	}
-
-	@Override
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
 	}
 
 	@Override
@@ -130,7 +116,7 @@ public class SiteEntity implements Site
 	{
 		if(siteForms.isEmpty())
 		{
-			siteForms = FormParser.getSiteFormsByUrl(url);
+			//siteForms = FormParser.getSiteFormsByUrl(url);
 		}
 		if(previewPath == null || "".equals(previewPath))
 		{

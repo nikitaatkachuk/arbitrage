@@ -56,6 +56,7 @@
                     </div>
                     <h2>Select forms for orders</h2>
                     <div class="bottom ">
+                        <!--<input type="text"> -->
                         <ul class="dropdown-menu btn-group" role="menu" aria-labelledby="dropdownMenu" >
                             <li th:each="form : ${currentSite.forms}">
                                 <input type="checkbox" th:text="${form.formId}" th:value="${form.formId}"/>

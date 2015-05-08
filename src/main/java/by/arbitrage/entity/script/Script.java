@@ -1,15 +1,15 @@
 package by.arbitrage.entity.script;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import by.arbitrage.entity.GenericEntityImpl;
+
+import javax.persistence.*;
 
 /**
  * Created by Nikita Tkachuk
  */
-@Entity(name = "script")
-public class Script
+@Entity
+@Table(name = "script")
+public class Script extends GenericEntityImpl
 {
 	private static final String GENERIC_SCRIPT = "<script>\n" +
 			"\tvar _paq = _paq || [];\n" +
@@ -20,8 +20,6 @@ public class Script
 			"          //ga('send', 'pageview');\n" +
 			"      </script>";
 
-	@Id @GeneratedValue
-	private Long id;
 
 	@Column(name = "script")
 	private String userScript;
@@ -32,16 +30,6 @@ public class Script
 	}
 
 	public Script() {}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
 
 	public String getUserScript()
 	{

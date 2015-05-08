@@ -1,5 +1,6 @@
 package by.arbitrage.entity.site.dto;
 
+import by.arbitrage.entity.general.AbstractDTO;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.SiteEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by Nikita Tkachuk
  */
-public class SiteDTO implements Site
+public class SiteDTO extends AbstractDTO
 {
 	private Long id;
 

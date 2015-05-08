@@ -1,5 +1,6 @@
 package by.arbitrage.entity.statistic;
 
+import by.arbitrage.entity.GenericEntityImpl;
 import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.user.UserEntity;
 
@@ -8,13 +9,10 @@ import javax.persistence.*;
 /**
  * Created by Nikita Tkachuk
  */
-@Entity(name = "statistic")
-public class StatisticEntity implements Statistic
+@Entity
+@Table(name = "statistic")
+public class StatisticEntity extends GenericEntityImpl implements Statistic
 {
-
-	@Id
-	@GeneratedValue
-	private Long id;
 
 	@Column(name = "firstVisits", nullable = false)
 	private Integer firstVisits;
@@ -32,18 +30,6 @@ public class StatisticEntity implements Statistic
 	@OneToOne
 	@JoinColumn(name = "site_fk", nullable = false)
 	private SiteEntity siteEntity;
-
-
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
 
 	@Override
 	public Integer getFirstVisits()

@@ -49,7 +49,7 @@ public class SiteController
 		SiteEntity currentSite = siteService.findUserSiteById(userContext.getCurrentUser(), Long.valueOf(id));
 		SiteDTO dto = siteConverter.convertEntityToDTO(currentSite);
 		model.addAttribute("currentSite", dto);
-		getStatistic(currentSite);
+		model.addAttribute("statistic", getStatistic(currentSite));
 
 		return "site";
 	}
@@ -66,7 +66,7 @@ public class SiteController
 		return siteService.getAllSites();
 	}
 
-	@ModelAttribute("statistic")
+	//@ModelAttribute("statistic")
 	private Statistic getStatistic(SiteEntity site)
 	{
 		if(site != null)

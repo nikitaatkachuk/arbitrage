@@ -36,7 +36,7 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 	@Override
 	public SiteDTO convertEntityToDTO(SiteEntity entity)
 	{
-		SiteDTO siteDTO = new SiteDTO(entity.getId(), entity.getUrl());
+		SiteDTO siteDTO = new SiteDTO(entity.getIdentity(), entity.getUrl());
 		siteDTO.setScript(entity.getScript().getUserScript());
 		siteDTO.setForms((List<UserSiteForm>) entity.getSiteForms());
 		siteDTO.setPreviewPath(entity.getPreviewPath());
@@ -74,14 +74,14 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 
 	private Collection<UserSiteForm> buildSiteFormsCollection(String url)
 	{
-		try
-		{
-			return FormParser.getSiteFormsByUrl(url);
-		}
-		catch (IOException e)
-		{
-			LOGGER.warn("Could not parsed site by url " + url);
-		}
+//		try
+//		{
+//			return FormParser.getSiteFormsByUrl(url);
+//		}
+//		catch (IOException e)
+//		{
+//			LOGGER.warn("Could not parsed site by url " + url);
+//		}
 		return Collections.emptyList();
 	}
 }
