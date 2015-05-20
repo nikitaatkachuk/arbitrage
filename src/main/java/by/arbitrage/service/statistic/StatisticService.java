@@ -11,5 +11,5 @@ public interface StatisticService
 {
 	public StatisticEntity findBySiteEntity(SiteEntity siteEntity, UserEntity userEntity);
 
-	public void registerVisit(SiteEntity site, UserEntity user, boolean isSecondVisit);
+	public void registerVisitInStatistic(SiteEntity site, UserEntity user, boolean isSecondVisit);
 }

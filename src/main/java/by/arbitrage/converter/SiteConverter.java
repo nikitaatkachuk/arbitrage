@@ -1,9 +1,7 @@
 package by.arbitrage.converter;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import by.arbitrage.html.render.PreviewBuilder;
 import org.apache.log4j.Logger;
@@ -16,7 +14,6 @@ import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.user.UserEntity;
 import by.arbitrage.html.UserSiteForm;
-import by.arbitrage.html.parser.FormParser;
 import by.arbitrage.utils.GUIDGenerator;
 
 /**
@@ -38,7 +35,7 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 	{
 		SiteDTO siteDTO = new SiteDTO(entity.getIdentity(), entity.getUrl());
 		siteDTO.setScript(entity.getScript().getUserScript());
-		siteDTO.setForms((List<UserSiteForm>) entity.getSiteForms());
+		siteDTO.setVisits(entity.getVisits());
 		siteDTO.setPreviewPath(entity.getPreviewPath());
 		return siteDTO;
 	}
@@ -64,9 +61,9 @@ public class SiteConverter implements GenericConverter<SiteEntity, SiteDTO>
 		{
 			entity.setPreviewPath(siteDTO.getPreviewPath());
 		}
-		entity.setUsers(Collections.singletonList(user));
+		entity.setUsers(Collections.singleton(user));
 		entity.setScript(new Script("Empty Script"));
-		entity.setSiteForms(buildSiteFormsCollection(url));
+		//entity.setSiteForms(buildSiteFormsCollection(url));
 		return entity;
 	}
 

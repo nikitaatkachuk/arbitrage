@@ -1,17 +1,19 @@
 package by.arbitrage.entity.site;
 
 import by.arbitrage.entity.GenericEntityImpl;
-import by.arbitrage.entity.order.impl.OrderEntity;
+import by.arbitrage.entity.goal.Goal;
+import by.arbitrage.entity.goal.GoalEntity;
 import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.user.UserEntity;
-import by.arbitrage.html.UserSiteForm;
-import by.arbitrage.html.parser.FormParser;
+import by.arbitrage.entity.visit.Visit;
+import by.arbitrage.entity.visit.VisitEntity;
 import by.arbitrage.html.render.PreviewBuilder;
 
 import javax.persistence.*;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Nikita Tkachuk
@@ -24,22 +26,15 @@ public class SiteEntity extends GenericEntityImpl implements Site
 
 	private String guid;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "script_fk")
 	private Script script;
 
-	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
-	private List<UserEntity> users;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "site_fk", nullable = false)
-	private Collection<UserSiteForm> siteForms;
+	private Set<UserEntity> users;
 
 	private String previewPath;
 
-	/*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "site_fk", nullable = false)
-	private Collection<OrderEntity> orders;*/
+	private Set<Goal> goals;
+
+	private Set<Visit> visits;
 
 	public SiteEntity()
 	{
@@ -71,16 +66,19 @@ public class SiteEntity extends GenericEntityImpl implements Site
 		this.guid = guid;
 	}
 
-	public List<UserEntity> getUsers()
+	@ManyToMany(mappedBy = "sites", fetch = FetchType.EAGER)
+	public Set<UserEntity> getUsers()
 	{
 		return users;
 	}
 
-	public void setUsers(List<UserEntity> users)
+	public void setUsers(Set<UserEntity> users)
 	{
 		this.users = users;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "script_fk")
 	public Script getScript()
 	{
 		return script;
@@ -91,21 +89,23 @@ public class SiteEntity extends GenericEntityImpl implements Site
 		this.script = script;
 	}
 
-	public Collection<UserSiteForm> getSiteForms()
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = VisitEntity.class, orphanRemoval = true)
+	@JoinColumn(name = "site_fk", nullable = false, unique = true)
+	public Set<Visit> getVisits()
 	{
-		return siteForms;
+		return visits;
 	}
 
-	public void setSiteForms(Collection<UserSiteForm> siteForms)
+	public void setVisits(Set<Visit> visits)
 	{
-		this.siteForms = siteForms;
+		this.visits = visits;
 	}
-
 
 	public String getPreviewPath()
 	{
 		return previewPath;
 	}
+
 	public void setPreviewPath(String previewPath)
 	{
 		this.previewPath = previewPath;
@@ -114,14 +114,21 @@ public class SiteEntity extends GenericEntityImpl implements Site
 	@PrePersist
 	private void updateInformation() throws IOException
 	{
-		if(siteForms.isEmpty())
-		{
-			//siteForms = FormParser.getSiteFormsByUrl(url);
-		}
-		if(previewPath == null || "".equals(previewPath))
+		if (previewPath == null || "".equals(previewPath))
 		{
 			previewPath = PreviewBuilder.buildPreview(url, guid);
 		}
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = GoalEntity.class, orphanRemoval = true)
+	@JoinColumn(name = "site_fk", nullable = false, unique = true)
+	public Set<Goal> getGoals()
+	{
+		return goals;
+	}
+
+	public void setGoals(Set<Goal> goals)
+	{
+		this.goals = goals;
+	}
 }

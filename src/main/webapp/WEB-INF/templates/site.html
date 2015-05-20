@@ -3,25 +3,83 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>You site</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.css}" th:rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/resources/css/main.css}" th:rel="stylesheet"/>
-    <script type="text/javascript" th:src="@{/resources/js/jquery.js}" />
+    <script type="text/javascript" th:src="@{/resources/js/jquery.js}"/>
     <script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}"/>
+    <script type="text/javascript" th:src="@{/resources/js/main.js}"/>
+    <script type="text/javascript" th:src="@{/resources/js/Chart.js}"/>
+    <script type="text/javascript" th:inline="javascript">
+        var randomScalingFactor = function () {
+            return Math.round(Math.random() * 100)
+        };
+        var keys = Object.keys(buildLines());
+        var lineChartData = {
+            labels: keys,
+            datasets: [
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "rgba(151,187,205,1)",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: keys.map(function(v) { return buildLines()[v]; })
+//                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                }
+            ]
+
+        };
+        function buildLines()
+        {
+            var dates = {};
+            var visits = [[${currentSite.getVisits()}]];
+            visits.forEach(function(item, i, arr){
+               var dateString = date2string( new Date(item['visitTime']));
+               if(dateString in dates)
+               {
+                   dates[dateString]++;
+               }
+                else
+               {
+                   dates[dateString] = 1;
+               }
+            });
+           // var visit1 = visits[0];
+            //result.push(visit1['visitTime']);
+            //i++;
+
+            return dates;
+        }
+        function date2string(date)
+        {
+            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
+        }
+
+        window.onload = function () {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myLine = new Chart(ctx).Line(lineChartData, {
+                responsive: false
+            });
+        }
+    </script>
 </head>
 <body>
 <div th:if="${currentSite} == null">
-<h2>Site cannot be found</h2>
+    <h2>Site cannot be found</h2>
 </div>
 <div th:if="${currentSite} != null">
-<div class="container>">
-    <div class="jumbotron">
-<h2 th:text="${currentSite.getUrl()}"></h2>
-
-        <img th:src="${currentSite.getPreviewPath()}" width="200" height="200"/>
-        <div th:if="${statistic} != null">
-            <table class="table table-hover table-bordered sites_table">
-                <thead>
+    <div class="container>">
+        <div class="jumbotron">
+            <div id="header">
+                <h2 th:text="${currentSite.getUrl()}"></h2>
+                <img th:src="${currentSite.getPreviewPath()}" width="100" height="100"/>
+            </div>
+            <div class="statistic_table" th:if="${statistic} != null">
+                <table class="table table-hover table-bordered sites_table">
+                    <thead>
                     <tr>
                         <td>
                             First visits
@@ -33,46 +91,50 @@
                             Orders
                         </td>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td th:text="${statistic.getFirstVisits()}"></td>
                         <td th:text="${statistic.getSecondVisits()}"></td>
                         <td th:text="${statistic.getOrderCount()}"></td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-        <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Show script</button>
-        <button class="btn btn-primary"  data-toggle="modal" data-target=".defaultPopoutDialog">Build script</button>
-        <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog"   aria-hidden="true">
-            <div class="modal-dialog modal-sm ">
-                <div class="modal-content">
-                    <div class="model-header">
-                        <div class="top">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-                            <h2 class="modal-title"> Build script</h2>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">Show script
+            </button>
+            <button class="btn btn-primary" data-toggle="modal" data-target=".defaultPopoutDialog">Build script</button>
+            <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm ">
+                    <div class="modal-content">
+                        <div class="model-header">
+                            <div class="top">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">x</span></button>
+                                <h2 class="modal-title"> Build Goal</h2>
+                            </div>
                         </div>
-                    </div>
-                    <h2>Select forms for orders</h2>
-                    <div class="bottom ">
-                        <!--<input type="text"> -->
-                        <ul class="dropdown-menu btn-group" role="menu" aria-labelledby="dropdownMenu" >
-                            <li th:each="form : ${currentSite.forms}">
-                                <input type="checkbox" th:text="${form.formId}" th:value="${form.formId}"/>
-                            </li>
-                        </ul>
-                        <button class="btn btn-primary" >Generate script</button>
+                        <div class="bottom">
+                            <h2 class="goal_popout_h2">Write URL string for goal </h2>
+                            <input type="text" id="pageUrlPattern" placeholder="Page pattern"/>
+                            <br/>
+                            <label for="isEndPoint"> Is end point?</label><input type="checkbox" id="isEndPoint"/>
+                            <br/>
+                            <button class="btn btn-primary goal_popout_button" onclick="addGoal()">Add goal</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="collapse" id="collapseExample">
-            <div class="well">
-                <div th:text="${currentSite.getScript()}"></div>
+            <div class="collapse" id="collapseExample">
+                <div class="well">
+                    <!--<div th:text="${currentSite.getScript()}"></div>-->
+                </div>
+            </div>
+            <div width="30%">
+                <canvas id="canvas" height="200" width="600"></canvas>
             </div>
         </div>
-    </div>
     </div>
 </div>
 </body>

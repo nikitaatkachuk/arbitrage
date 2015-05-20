@@ -1,6 +1,6 @@
-package by.arbitrage.entity.order.impl;
+package by.arbitrage.entity.goal;
 
-import by.arbitrage.entity.order.Order;
+import by.arbitrage.entity.GenericEntityImpl;
 
 import javax.persistence.*;
 
@@ -8,50 +8,34 @@ import javax.persistence.*;
  * Created by Nikita Tkachuk
  */
 @Entity
-@Table(name = "site_orders")
-public class OrderEntity implements Order
+@Table(name = "completed_goals")
+public class GoalCompleteInfoEntity extends GenericEntityImpl implements GoalCompleteInfo
 {
-	//@Column(name = "ID")
-	@Id
-	@GeneratedValue
-	private Long id;
 
-	@Column(name = "order_time")
 	private Long orderTime;
 
-	@Column(name = "order_data")
 	private String orderData;
 
-	@Column(name = "second_visit")
 	private boolean secondVisit;
 
-	public OrderEntity()
+	public GoalCompleteInfoEntity()
 	{
 	}
 
-	public OrderEntity(Order order)
+	public GoalCompleteInfoEntity(GoalCompleteInfo goalCompleteInfo)
 	{
-		this(order.getOrderTime(), order.getOrderData(), order.isSecondVisit());
+		this(goalCompleteInfo.getOrderTime(), goalCompleteInfo.getOrderData(), goalCompleteInfo.isSecondVisit());
 	}
 
-	public OrderEntity(Long orderTime, String orderData, Boolean secondVisit)
+	public GoalCompleteInfoEntity(Long orderTime, String orderData, Boolean secondVisit)
 	{
 		this.orderTime = orderTime;
 		this.orderData = orderData;
 		this.secondVisit = secondVisit;
 	}
 
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId(Long id)
-	{
-		this.id = id;
-	}
-
 	@Override
+	@Column(name = "order_time")
 	public Long getOrderTime()
 	{
 		return orderTime;
@@ -63,6 +47,7 @@ public class OrderEntity implements Order
 	}
 
 	@Override
+	@Column(name = "order_data")
 	public String getOrderData()
 	{
 		return orderData;
@@ -73,6 +58,7 @@ public class OrderEntity implements Order
 		this.orderData = orderData;
 	}
 
+	@Column(name = "second_visit")
 	public boolean isSecondVisit()
 	{
 		return secondVisit;

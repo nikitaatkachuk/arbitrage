@@ -34,7 +34,7 @@ public class StatisticServiceImpl implements StatisticService
 	}
 
 	@Override
-	public void registerVisit(SiteEntity site, UserEntity user, boolean isSecondVisit)
+	public void registerVisitInStatistic(SiteEntity site, UserEntity user, boolean isSecondVisit)
 	{
 		StatisticEntity statistic = findBySiteEntity(site, user);
 		if(statistic != null)

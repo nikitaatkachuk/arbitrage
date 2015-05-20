@@ -1,13 +1,13 @@
-package by.arbitrage.entity.order.dto;
+package by.arbitrage.entity.goal;
 
-import by.arbitrage.entity.order.Order;
+import by.arbitrage.entity.general.AbstractDTO;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 /**
  * Created by Nikita Tkachuk
  */
 @JsonAutoDetect
-public class OrderDTO implements Order
+public class GoalCompleteInfoDTO extends AbstractDTO implements GoalCompleteInfo
 {
 	private Long orderTime;
 

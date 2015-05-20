@@ -21,7 +21,6 @@ public class Script extends GenericEntityImpl
 			"      </script>";
 
 
-	@Column(name = "script")
 	private String userScript;
 
 	public Script(String userScript)
@@ -31,6 +30,7 @@ public class Script extends GenericEntityImpl
 
 	public Script() {}
 
+	@Column(name = "script")
 	public String getUserScript()
 	{
 		return userScript;

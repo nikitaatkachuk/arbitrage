@@ -14,24 +14,19 @@ import javax.persistence.*;
 public class StatisticEntity extends GenericEntityImpl implements Statistic
 {
 
-	@Column(name = "firstVisits", nullable = false)
 	private Integer firstVisits;
 
-	@Column(name = "secondVisits", nullable = false)
 	private Integer secondVisits;
 
-	@Column(name = "orderCount", nullable = false)
 	private Integer orderCount;
 
-	@OneToOne
-	@JoinColumn(name = "user_fk", nullable = false)
+
 	private UserEntity user;
 
-	@OneToOne
-	@JoinColumn(name = "site_fk", nullable = false)
 	private SiteEntity siteEntity;
 
 	@Override
+	@Column(name = "firstVisits", nullable = false)
 	public Integer getFirstVisits()
 	{
 		return firstVisits;
@@ -43,6 +38,7 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 	}
 
 	@Override
+	@Column(name = "secondVisits", nullable = false)
 	public Integer getSecondVisits()
 	{
 		return secondVisits;
@@ -54,6 +50,7 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 	}
 
 	@Override
+	@Column(name = "orderCount", nullable = false)
 	public Integer getOrderCount()
 	{
 		return orderCount;
@@ -64,6 +61,8 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 		this.orderCount = orderCount;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "user_fk", nullable = false)
 	public UserEntity getUser()
 	{
 		return user;
@@ -74,6 +73,8 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 		this.user = user;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "site_fk", nullable = false)
 	public SiteEntity getSiteEntity()
 	{
 		return siteEntity;

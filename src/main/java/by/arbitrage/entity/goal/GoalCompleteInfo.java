@@ -1,11 +1,11 @@
-package by.arbitrage.entity.order;
+package by.arbitrage.entity.goal;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import by.arbitrage.entity.GenericEntity;
 
 /**
  * Created by Nikita Tkachuk
  */
-public interface Order
+public interface GoalCompleteInfo extends GenericEntity
 {
 	public Long getOrderTime();
 

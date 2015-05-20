@@ -1,12 +1,12 @@
 package by.arbitrage.controller.rest;
 
-import by.arbitrage.entity.site.Site;
 import by.arbitrage.entity.site.SiteEntity;
-import by.arbitrage.entity.user.User;
 import by.arbitrage.entity.user.UserEntity;
+import by.arbitrage.entity.visit.VisitEntity;
 import by.arbitrage.service.SiteService;
 import by.arbitrage.service.statistic.StatisticService;
 import by.arbitrage.service.user.UserService;
+import by.arbitrage.service.visit.VisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +20,9 @@ public class SiteStatisticRestController
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private VisitService visitService;
 
 	@Autowired
 	private SiteService siteService;
@@ -38,7 +41,9 @@ public class SiteStatisticRestController
 			SiteEntity site = siteService.findSiteByGuid(siteGuid);
 			if(site != null && user != null)
 			{
-				statisticService.registerVisit(site, user, isCookie);
+				//site.getVisits().add(new VisitEntity(isCookie, System.currentTimeMillis()));
+				statisticService.registerVisitInStatistic(site, user, isCookie);
+				siteService.updateSite(site);
 			}
 		}
 		catch (Exception e)

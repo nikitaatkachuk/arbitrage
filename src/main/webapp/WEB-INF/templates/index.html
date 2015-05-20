@@ -22,7 +22,7 @@
           </thead>
           <tbody class="sites_table">
               <tr th:each="site : ${currentUserSites}" class="info">
-                  <td><a th:text="${site.url}" th:href="@{/site/} + ${site.id}"></a></td>
+                  <td><a th:text="${site.url}" th:href="@{/site/} + ${site.id} + @{/} "></a></td>
                   <td><button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" data-placement="right" title="Remove site">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </button></td>

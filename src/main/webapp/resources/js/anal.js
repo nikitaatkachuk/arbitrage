@@ -36,10 +36,8 @@
             }
         }
     }
-    var guid = _paq[0][0];
-    var form = _paq[1][0];
-    var tracker = new Tracker(decodeURI(win.document.url), guid);
-    tracker.buildListener(form);
+
+    //tracker.buildListener(form);
    // for (iterator = 0; iterator < _paq.length; iterator++) {
    //      = _paq[iterator][0];
         //if (applyFirst[methodName]) {
@@ -241,14 +239,14 @@
 
          function sendXmlHttpRequest(request, callback, fallbackToGet) {
             $.ajax({
-                url: 'http://localhost:8080/sitestat',
+                url: 'http://localhost:8080/sitevisit',
                 type: 'POST',
                 data: (request),
                 success: function (data) {
                 },
                 error: function (xhr, status, error) {
                     //var err = eval("(" + xhr.responseText + ")");
-                    //alert(xhr.responseText + " " + error + " " + status + " ");
+                    alert(xhr.responseText + " " + error + " " + status + " ");
                 }
             });
         }
@@ -265,7 +263,9 @@
         }*/
         return{
             sendData: function(request, callback, fallbackToGet)
-            {return sendXmlHttpRequest(request, callback, fallbackToGet)},
+            {
+                return sendXmlHttpRequest(request, callback, fallbackToGet)
+            },
             url:parseGET()[namekey],
             siteGuid:siteGuid,
             setCookie:function ()
@@ -285,13 +285,16 @@
         }
     }
    // new Tracker(decodeURI(window.document.location.search), "opopo");
-    //tracker.setCookie();
-    //var cookieVisitorIdValues = tracker.getCookie();
-    //var userGuid = cookieVisitorIdValues.userGuid;
+    var siteGuid = _paq[0][0];
+    //var form = _paq[1][0];
+    var tracker = new Tracker(decodeURI(win.document.url), siteGuid);
+    tracker.setCookie();
+    var cookieVisitorIdValues = tracker.getCookie();
+    var userGuid = cookieVisitorIdValues.userGuid;
     //alert(userGuid);
-    //if(userGuid)
-    //{
-    //    var json = {"siteGuid" : "11998d56-5f96-44b0-8dd1-22c2058272c2", "userGuid": userGuid, "isCookie" : "1"};
-    //}
-    //tracker.sendData(json, null, null);
+    if(userGuid)
+    {
+        var json = {"siteGuid" : siteGuid, "userGuid": userGuid, "isCookie" : "1"};
+    }
+    tracker.sendData(json, null, null);
 })(window);

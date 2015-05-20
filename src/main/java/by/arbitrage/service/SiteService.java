@@ -6,12 +6,14 @@ import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.entity.site.dto.SiteDTO;
 import by.arbitrage.entity.user.User;
 import by.arbitrage.entity.user.UserEntity;
+import by.arbitrage.entity.visit.Visit;
 import by.arbitrage.html.UserSiteForm;
 import by.arbitrage.html.parser.FormParser;
 import by.arbitrage.repository.SiteRepository;
 import by.arbitrage.service.user.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,8 @@ import java.util.List;
  * Created by Nikita Tkachuk
  */
 @Service
+@Transactional
+@Scope("singleton")
 public class SiteService
 {
 	private static final Logger LOGGER = Logger.getLogger(SiteService.class);
@@ -66,10 +70,21 @@ public class SiteService
 		return site.getUsers().contains(user) ? site : null;
 	}
 
+//	public void addVisit(SiteEntity siteEntity, Visit visit)
+//	{
+//		siteEntity.getVisits().add(visit);
+//	}
+
 	@Transactional
 	public SiteEntity saveSiteByDTO(SiteDTO siteDTO, UserEntity user)
 	{
 		return repository.saveAndFlush(converter.convertDTOToEntity(siteDTO, user));
+	}
+
+	@Transactional
+	public SiteEntity updateSite(SiteEntity siteEntity)
+	{
+		return repository.save(siteEntity);
 	}
 
 	@Transactional

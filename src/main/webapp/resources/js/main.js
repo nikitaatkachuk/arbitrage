@@ -3,9 +3,9 @@
  */
 
 
-function closeAddSiteDialog()
+function closeDialog()
 {
-    $('.addSiteDialog').hide();
+    $('.close').click();
 }
 
 function addSite()
@@ -19,7 +19,7 @@ function addSite()
             url: siteUrl
         }),
         success: function(data) {
-            closeAddSiteDialog();
+            closeDialog();
             $(".sites_table").append("<tr><td class='info'><a href= /site/" + data.id + ">" + data.url + "</a></td><td></td></tr>");
         },
         error: function(xhr, status, error) {
@@ -42,12 +42,36 @@ function registerVisit()
             secondVisit:true
         }),
         success: function(data) {
-            //closeAddSiteDialog();
+            //closeDialog();
             //$(".sites_table").append("<tr><td class='info'><a href= /site/" + data.id + ">" + data.url + "</a></td><td></td></tr>");
         },
         error: function(xhr, status, error) {
             //var err = eval("(" + xhr.responseText + ")");
             alert(xhr.responseText + " " + error + " " + status + " ");
+        }
+    });
+}
+
+function addGoal()
+{
+    var pageUrlPattern = $('#pageUrlPattern').val();
+    var isEndPoint = document.getElementById('isEndPoint').checked;
+    // var json = {"url" : siteUrl } ;
+    $.ajax({
+        url: 'goal/register',
+        type: 'POST',
+        data : ({
+            pageUrlPattern: pageUrlPattern,
+            endPoint: isEndPoint
+        }),
+        success: function(data) {
+            closeDialog();
+            //$(".sites_table").append("<tr><td class='info'><a href= /site/" + data.id + ">" + data.url + "</a></td><td></td></tr>");
+        },
+        error: function(xhr, status, error) {
+            closeDialog();
+            //var err = eval("(" + xhr.responseText + ")");
+            //alert(xhr.responseText + " " + error + " " + status + " ");
         }
     });
 }

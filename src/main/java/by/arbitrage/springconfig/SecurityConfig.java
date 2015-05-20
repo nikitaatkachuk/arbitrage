@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 /**
  * Created by Nikita Tkachuk
  */
-//@Order(1)
+//@GoalCompleteInfo(1)
 @Configuration
 @EnableWebMvcSecurity
 @EnableWebSecurity
@@ -53,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 				.authorizeRequests()
 				.antMatchers("/resources/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/sitestat").permitAll()
-				.antMatchers(HttpMethod.POST, "/sitestat").permitAll()
+				.antMatchers(HttpMethod.POST, "/sitevisit").permitAll()
 				.antMatchers(HttpMethod.POST, "/addSite").authenticated()
-				.antMatchers(HttpMethod.POST, "/order/register").permitAll()
+				.antMatchers(HttpMethod.POST, "/goalComplete").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()

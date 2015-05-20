@@ -1,18 +1,17 @@
 package by.arbitrage.entity.site.dto;
 
 import by.arbitrage.entity.general.AbstractDTO;
-import by.arbitrage.entity.script.Script;
 import by.arbitrage.entity.site.Site;
-import by.arbitrage.entity.site.SiteEntity;
-import by.arbitrage.html.UserSiteForm;
+import by.arbitrage.entity.visit.Visit;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 /**
  * Created by Nikita Tkachuk
  */
-public class SiteDTO extends AbstractDTO
+@JsonAutoDetect
+public class SiteDTO extends AbstractDTO implements Site
 {
 	private Long id;
 
@@ -22,7 +21,7 @@ public class SiteDTO extends AbstractDTO
 
 	private String previewPath;
 
-	private List<UserSiteForm> forms;
+	private Collection<Visit> visits;
 
 
 
@@ -53,6 +52,7 @@ public class SiteDTO extends AbstractDTO
 		this.id = id;
 	}
 
+	@Override
 	public String getUrl()
 	{
 		if(url.startsWith("http"))
@@ -77,14 +77,14 @@ public class SiteDTO extends AbstractDTO
 		this.script = script;
 	}
 
-	public List<UserSiteForm> getForms()
+	public Collection<Visit> getVisits()
 	{
-		return forms;
+		return visits;
 	}
 
-	public void setForms(List<UserSiteForm> forms)
+	public void setVisits(Collection<Visit> visits)
 	{
-		this.forms = forms;
+		this.visits = visits;
 	}
 
 	public String getPreviewPath()
