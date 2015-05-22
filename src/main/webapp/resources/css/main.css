@@ -31,7 +31,10 @@
     margin:50px;
     padding: 10px;
 }
-
+.sites_table{
+    width: 30%;
+    float:left;
+}
 .goal_popout_button{
     margin: 15px;
 }

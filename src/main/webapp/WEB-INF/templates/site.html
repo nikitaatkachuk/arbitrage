@@ -75,7 +75,7 @@
         <div class="jumbotron">
             <div id="header">
                 <h2 th:text="${currentSite.getUrl()}"></h2>
-                <img th:src="${currentSite.getPreviewPath()}" width="100" height="100"/>
+                <img th:src="${currentSite.getPreviewPath()}" width="150" height="150"/>
             </div>
             <div class="statistic_table" th:if="${statistic} != null">
                 <table class="table table-hover table-bordered sites_table">
@@ -100,11 +100,14 @@
                     </tr>
                     </tbody>
                 </table>
+                <div width="30%">
+                    <canvas id="canvas" height="150" width="600"></canvas>
+                </div>
             </div>
             <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample">Show script
             </button>
-            <button class="btn btn-primary" data-toggle="modal" data-target=".defaultPopoutDialog">Build script</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target=".defaultPopoutDialog">Build goal</button>
             <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-sm ">
                     <div class="modal-content">
@@ -130,9 +133,6 @@
                 <div class="well">
                     <!--<div th:text="${currentSite.getScript()}"></div>-->
                 </div>
-            </div>
-            <div width="30%">
-                <canvas id="canvas" height="200" width="600"></canvas>
             </div>
         </div>
     </div>
