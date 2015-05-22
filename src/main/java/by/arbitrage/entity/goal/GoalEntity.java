@@ -2,6 +2,8 @@ package by.arbitrage.entity.goal;
 
 import by.arbitrage.converter.GoalCompleteInfoConverter;
 import by.arbitrage.entity.GenericEntityImpl;
+import by.arbitrage.entity.site.Site;
+import by.arbitrage.entity.site.SiteEntity;
 import by.arbitrage.html.UserSiteForm;
 
 import javax.persistence.*;
@@ -22,6 +24,8 @@ public class GoalEntity extends GenericEntityImpl implements Goal
 	private Collection<GoalCompleteInfo> completedGoals;
 
 	private Collection<UserSiteForm> siteForms;
+
+	private Site site;
 
 	public GoalEntity()
 	{
@@ -87,5 +91,17 @@ public class GoalEntity extends GenericEntityImpl implements Goal
 	public void setSiteForms(Collection<UserSiteForm> siteForms)
 	{
 		this.siteForms = siteForms;
+	}
+
+	@ManyToOne(targetEntity = SiteEntity.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "site_fk")
+	public Site getSite()
+	{
+		return site;
+	}
+
+	public void setSite(Site site)
+	{
+		this.site = site;
 	}
 }

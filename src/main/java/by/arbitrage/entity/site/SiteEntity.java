@@ -32,7 +32,7 @@ public class SiteEntity extends GenericEntityImpl implements Site
 
 	private String previewPath;
 
-	private Set<Goal> goals;
+	private Collection<Goal> goals;
 
 	private Set<Visit> visits;
 
@@ -120,14 +120,14 @@ public class SiteEntity extends GenericEntityImpl implements Site
 		}
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = GoalEntity.class, orphanRemoval = true)
-	@JoinColumn(name = "site_fk", nullable = false, unique = true)
-	public Set<Goal> getGoals()
+	@OneToMany(mappedBy = "site",cascade = {
+			CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH}, fetch = FetchType.EAGER, targetEntity = GoalEntity.class, orphanRemoval = true)
+	public Collection<Goal> getGoals()
 	{
 		return goals;
 	}
 
-	public void setGoals(Set<Goal> goals)
+	public void setGoals(Collection<Goal> goals)
 	{
 		this.goals = goals;
 	}
