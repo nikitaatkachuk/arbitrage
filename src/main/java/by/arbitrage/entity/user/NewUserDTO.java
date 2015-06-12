@@ -1,8 +1,11 @@
 package by.arbitrage.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 /**
  * Created by Nikita Tkachuk
  */
+@JsonAutoDetect
 public class NewUserDTO
 {
 	private String login;

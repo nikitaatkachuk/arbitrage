@@ -19,8 +19,11 @@ public class UserEntity extends GenericEntityImpl implements User
 
 	private String guid;
 
+	private UserRole userRole;
 
 	private List<SiteEntity> sites;
+
+	private String email;
 
 	public UserEntity()
 	{
@@ -64,6 +67,18 @@ public class UserEntity extends GenericEntityImpl implements User
 		this.password = password;
 	}
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "user_role")
+	public UserRole getUserRole()
+	{
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole)
+	{
+		this.userRole = userRole;
+	}
+
 	@Override
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "jnd_site_user", joinColumns = @JoinColumn(name = "user_fk"), inverseJoinColumns = @JoinColumn(name = "site_fk"))
@@ -77,8 +92,19 @@ public class UserEntity extends GenericEntityImpl implements User
 		this.sites = sites;
 	}
 
-	public void addSite(SiteEntity site)
+//	public void addSite(SiteEntity site)
+//	{
+//		this.sites.add(site);
+//	}
+
+	@Column(name = "email")
+	public String getEmail()
 	{
-		this.sites.add(site);
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
 	}
 }

@@ -11,6 +11,7 @@ public class VisitDTO extends AbstractDTO implements Visit
 {
 	private boolean secondVisit;
 	private Long visitTime;
+	private String userGuid;
 
 	public VisitDTO()
 	{
@@ -46,5 +47,16 @@ public class VisitDTO extends AbstractDTO implements Visit
 	public void setVisitTime(Long visitTime)
 	{
 		this.visitTime = visitTime;
+	}
+
+	@Override
+	public String getUserGuid()
+	{
+		return userGuid;
+	}
+
+	public void setUserGuid(String userGuid)
+	{
+		this.userGuid = userGuid;
 	}
 }

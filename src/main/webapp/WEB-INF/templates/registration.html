@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login page</title>
+    <title>Registration page</title>
     <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.css}" th:rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/resources/css/main.css}" th:rel="stylesheet"/>
     <style type="text/css">
@@ -9,17 +9,16 @@
     </style>
 </head>
 <body>
-<!--<h1>Login page</h1>-->
-<!--<p th:if="${loginError}">Wrong user or password</p>-->
 <div class="container">
-    <form th:action="@{/j_spring_security_check}" method="post" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="j_username">Username</label>:
-        <input class="input-block-level" type="text" id="j_username" name="j_username" placeholder="Login" /> <br />
-        <label for="j_password">Password</label>:
-        <input class="input-block-level" type="password" id="j_password" name="j_password" placeholder="Password"/> <br />
-        <button class="btn btn-lg btn-primary" type="submit">Log in</button>
-        <a class="btn btn-lg btn-warning" href="/registration">Registration</a>
+    <form action="/registration" method="post" class="form-signin">
+        <h2 class="form-signin-heading">Registration</h2>
+        <label for="email">Email</label>:
+        <input class="input-block-level" type="text" id="email" name="j_email" placeholder="Email" /> <br />
+        <label for="username">Username</label>:
+        <input class="input-block-level" type="text" id="username" name="j_username" placeholder="Login" /> <br />
+        <label for="password">Password</label>:
+        <input class="input-block-level" type="password" id="password" name="j_password" placeholder="Password"/> <br />
+        <button class="btn btn-lg btn-primary" type="submit">Registration</button>
     </form>
 </div>
 </body>

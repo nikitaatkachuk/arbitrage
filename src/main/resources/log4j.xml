@@ -10,7 +10,7 @@
     </appender>
 
     <appender name="springAppender" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="C:/spring-details.log" />
+        <param name="file" value="E:/ee/spring-details.log" />
         <param name="append" value="true" />
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"

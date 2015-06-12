@@ -54,7 +54,7 @@ public class StatisticServiceImpl implements StatisticService
 			statistic.setSiteEntity(site);
 			statistic.setUser(user);
 			statistic.setSecondVisits(0);
-			statistic.setOrderCount(0);
+			statistic.setCompletedGoals(0);
 			statistic.setFirstVisits(1);
 		}
 		statisticRepository.save(statistic);

@@ -10,61 +10,8 @@
     <script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}"/>
     <script type="text/javascript" th:src="@{/resources/js/main.js}"/>
     <script type="text/javascript" th:src="@{/resources/js/Chart.js}"/>
-    <script type="text/javascript" th:inline="javascript">
-        var randomScalingFactor = function () {
-            return Math.round(Math.random() * 100)
-        };
-        var keys = Object.keys(buildLines());
-        var lineChartData = {
-            labels: keys,
-            datasets: [
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: keys.map(function(v) { return buildLines()[v]; })
-//                    data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-                }
-            ]
+    <script>console.log(date2string(new Date(1431562574204)))</script>
 
-        };
-        function buildLines()
-        {
-            var dates = {};
-            var visits = [[${currentSite.getVisits()}]];
-            visits.forEach(function(item, i, arr){
-               var dateString = date2string( new Date(item['visitTime']));
-               if(dateString in dates)
-               {
-                   dates[dateString]++;
-               }
-                else
-               {
-                   dates[dateString] = 1;
-               }
-            });
-           // var visit1 = visits[0];
-            //result.push(visit1['visitTime']);
-            //i++;
-
-            return dates;
-        }
-        function date2string(date)
-        {
-            return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
-        }
-
-        window.onload = function () {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myLine = new Chart(ctx).Line(lineChartData, {
-                responsive: false
-            });
-        }
-    </script>
 </head>
 <body>
 <div th:if="${currentSite} == null">
@@ -73,67 +20,79 @@
 <div th:if="${currentSite} != null">
     <div class="container>">
         <div class="jumbotron">
-            <div id="header">
-                <h2 th:text="${currentSite.getUrl()}"></h2>
-                <img th:src="${currentSite.getPreviewPath()}" width="150" height="150"/>
-            </div>
-            <div class="statistic_table" th:if="${statistic} != null">
-                <table class="table table-hover table-bordered sites_table">
-                    <thead>
-                    <tr>
-                        <td>
-                            First visits
-                        </td>
-                        <td>
-                            Second visits
-                        </td>
-                        <td>
-                            Orders
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${statistic.getFirstVisits()}"></td>
-                        <td th:text="${statistic.getSecondVisits()}"></td>
-                        <td th:text="${statistic.getOrderCount()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div width="30%">
-                    <canvas id="canvas" height="150" width="600"></canvas>
-                </div>
-            </div>
-            <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">Show script
-            </button>
-            <button class="btn btn-primary" data-toggle="modal" data-target=".defaultPopoutDialog">Build goal</button>
-            <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm ">
-                    <div class="modal-content">
-                        <div class="model-header">
-                            <div class="top">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">x</span></button>
-                                <h2 class="modal-title"> Build Goal</h2>
+            <div class="navbar navbar-fixed-top navbar-inverse">
+                <button class="btn btn-link" ype="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">Show script
+                </button>
+                <button class="btn btn-link" data-toggle="modal" data-target=".defaultPopoutDialog">Create goal
+                </button>
+                <a class="btn btn-link" href="statistic">Show Detail Statistic</a>
+                <button class="btn btn-link" data-toggle="modal" data-target=".defaultPopoutDialog">Add current site to group
+                </button>
+                <a class="btn btn-link" href="/index">Back to User Page
+                </a>
+
+                <div class="modal fade defaultPopoutDialog" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm ">
+                        <div class="modal-content">
+                            <div class="model-header">
+                                <div class="top">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">x</span></button>
+                                    <h2 class="modal-title"> Create Goal</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bottom">
-                            <h2 class="goal_popout_h2">Write URL string for goal </h2>
-                            <input type="text" id="pageUrlPattern" placeholder="Page pattern"/>
-                            <br/>
-                            <label for="isEndPoint"> Is end point?</label><input type="checkbox" id="isEndPoint"/>
-                            <br/>
-                            <button class="btn btn-primary goal_popout_button" onclick="addGoal()">Add goal</button>
+                            <div class="bottom">
+                                <h2 class="goal_popout_h2">Write URL string for goal </h2>
+                                <input type="text" id="pageUrlPattern" placeholder="Page pattern"/>
+                                <br/>
+                                <label for="isEndPoint"> Is end point?</label><input type="checkbox" id="isEndPoint"/>
+                                <br/>
+                                <button class="btn btn-primary goal_popout_button" onclick="addGoal()">Add goal</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="collapse" id="collapseExample">
-                <div class="well">
-                    <!--<div th:text="${currentSite.getScript()}"></div>-->
+                <div class="collapse" id="collapseExample">
+                    <div class="well">
+                        <!--<div th:text="${currentSite.getScript()}"></div>-->
+                    </div>
                 </div>
             </div>
+            <div id="center">
+               <div class="preview"> <img th:src="${currentSite.getPreviewPath()}" width="300" height="300"/></div>
+                <div class="mainInformation">
+                    <h2>Main information</h2>
+                    <p th:text="${currentSite.getUrl()}"></p>
+                    <p>Owner:Nick</p>
+                    <p>Available for groups: Arbitrage, ArbitrageManagers</p>
+                    <p>Was been added: 2015-05-14</p>
+                    <p>All visit count: 27</p>
+                </div>
+            </div>
+            <!--<div class="statistic_table" th:if="${statistic} != null">-->
+                <!--<table class="table table-hover table-bordered sites_table">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<td>-->
+                            <!--First visits-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--Second visits-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr>-->
+                        <!--<td th:text="${statistic.getFirstVisits()}"></td>-->
+                        <!--<td th:text="${statistic.getSecondVisits()}"></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <!--<div width="30%">-->
+                    <!--<canvas id="canvas" height="150" width="600"></canvas>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </div>

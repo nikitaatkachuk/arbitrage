@@ -10,4 +10,6 @@ public interface Visit extends GenericEntity
 	boolean isSecondVisit();
 
 	Long getVisitTime();
+
+	String getUserGuid();
 }
