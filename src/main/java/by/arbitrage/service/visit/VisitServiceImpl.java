@@ -22,6 +22,6 @@ public class VisitServiceImpl implements VisitService
 	@Transactional
 	public void saveVisit(Visit visit)
 	{
-		visitRepository.saveAndFlush(new VisitEntity(visit));
+		visitRepository.saveAndFlush(new VisitEntity(visit.isSecondVisit(), visit.getVisitTime(), visit.getUserGuid()));
 	}
 }

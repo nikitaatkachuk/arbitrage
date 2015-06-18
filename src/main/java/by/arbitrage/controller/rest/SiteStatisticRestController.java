@@ -41,7 +41,7 @@ public class SiteStatisticRestController
 			SiteEntity site = siteService.findSiteByGuid(siteGuid);
 			if(site != null && user != null)
 			{
-				//site.getVisits().add(new VisitEntity(isCookie, System.currentTimeMillis()));
+				site.getVisits().add(new VisitEntity(isCookie, System.currentTimeMillis(), userGuid));
 				statisticService.registerVisitInStatistic(site, user, isCookie);
 				siteService.updateSite(site);
 			}

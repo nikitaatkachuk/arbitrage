@@ -16,20 +16,17 @@ public class VisitEntity extends GenericEntityImpl  implements Visit
 
 	private Long visitTime;
 
+	private String userGuid;
 
 	public VisitEntity()
 	{
 	}
 
-	public VisitEntity(Visit visit)
-	{
-		this(visit.isSecondVisit(), visit.getVisitTime());
-	}
-
-	public VisitEntity(boolean secondVisit, Long visitTime)
+	public VisitEntity(boolean secondVisit, Long visitTime, String userGuid)
 	{
 		this.secondVisit = secondVisit;
 		this.visitTime = visitTime;
+		this.userGuid = userGuid;
 	}
 
 	@Override
@@ -53,5 +50,16 @@ public class VisitEntity extends GenericEntityImpl  implements Visit
 	public void setVisitTime(Long visitTime)
 	{
 		this.visitTime = visitTime;
+	}
+
+	@Column(name = "user_guid")
+	public String getUserGuid()
+	{
+		return userGuid;
+	}
+
+	public void setUserGuid(String userGuid)
+	{
+		this.userGuid = userGuid;
 	}
 }

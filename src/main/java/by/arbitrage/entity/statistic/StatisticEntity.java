@@ -18,8 +18,7 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 
 	private Integer secondVisits;
 
-	private Integer orderCount;
-
+	private Integer completedGoals;
 
 	private UserEntity user;
 
@@ -51,14 +50,14 @@ public class StatisticEntity extends GenericEntityImpl implements Statistic
 
 	@Override
 	@Column(name = "orderCount", nullable = false)
-	public Integer getOrderCount()
+	public Integer getCompletedGoals()
 	{
-		return orderCount;
+		return completedGoals;
 	}
 
-	public void setOrderCount(Integer orderCount)
+	public void setCompletedGoals(Integer completedGoals)
 	{
-		this.orderCount = orderCount;
+		this.completedGoals = completedGoals;
 	}
 
 	@OneToOne

@@ -8,7 +8,7 @@ public enum UserRole
 	ADMIN,
 	OWNER,
 	MANAGER,
-	TEST;
+	USER;
 
 	UserRole()
 	{

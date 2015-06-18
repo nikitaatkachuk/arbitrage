@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/resources/bootstrap/css/bootstrap.css}" th:rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/resources/css/main.css}" th:rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/resources/js/jquery.js}" />
+    <script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}"/>
+    <script type="text/javascript"  th:src="@{/resources/js/main.js}" />
+    <title>Statistic</title>
+</head>
+<body>
+<h1>Statistic</h1>
+<div class="container">
+    <div class="jumbotron">
+        <ul role="menu" aria-labelledby="dLabel">
+            <label for="statistic_type_user">For user</label>
+            <li><input type="radio" id="statistic_type_user"/></li>
+            <label for="statistic_type_group">For group</label>
+            <li><input type="radio" id="statistic_type_group"/></li>
+            <label for="statistic_type_site">For site</label>
+            <li><input type="radio" id="statistic_type_site"/></li>
+        </ul>
+        <input class="input-block-level" type="text" id="statistic_target_name" /> <br />
+    </div>
+    <button class="btn btn-primary" onclick="getStatistic()">Get statistic</button>
+
+<div id="detail_statistic_table">
+    <table class="table table-hover table-bordered sites_table">
+        <thead>
+        <tr>
+            <td>
+                First visits
+            </td>
+            <td>
+                Second visits
+            </td>
+            <td>
+                Comleted Goals
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

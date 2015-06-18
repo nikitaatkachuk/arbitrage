@@ -23,7 +23,6 @@ import java.util.List;
  * Created by Nikita Tkachuk
  */
 @Controller
-//@RequestMapping("/site")
 public class SiteController
 {
 	@Autowired

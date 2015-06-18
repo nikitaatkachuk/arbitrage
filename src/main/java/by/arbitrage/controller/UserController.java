@@ -44,7 +44,7 @@ public class UserController
 			SiteDTO dto = new SiteDTO(newSiteURL);
 			UserEntity currentUser = userContext.getCurrentUser();
 			SiteEntity site = siteService.saveSiteByDTO(dto, currentUser);
-			currentUser.addSite(site);
+			currentUser.getSites().add(site);
 			userService.save(currentUser);
 			return siteConverter.convertEntityToDTO(site);
 		}

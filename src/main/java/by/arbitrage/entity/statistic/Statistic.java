@@ -9,5 +9,5 @@ public interface Statistic
 
 	Integer getSecondVisits();
 
-	Integer getOrderCount();
+	Integer getCompletedGoals();
 }

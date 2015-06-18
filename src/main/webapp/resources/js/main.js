@@ -75,6 +75,46 @@ function addGoal()
         }
     });
 }
+function date2string(date) {
+    return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
+}
+function getStatistic()
+{
+    var statisticRestMethod;
+    if(document.getElementById('statistic_type_user').checked)
+    {
+        statisticRestMethod = '/byusername';
+    }
+    else if(document.getElementById('statistic_type_site').checked)
+    {
+        statisticRestMethod = '/bysite';
+    }
+    else if(document.getElementById('statistic_type_group').checked)
+    {
+        statisticRestMethod = '/bygroupname';
+    }
+    else
+    {
+        alert("Please, select statistic type!");
+        return;
+    }
+    var statisticTargetName =  $('#statistic_target_name').val();
+    $.ajax({
+        url: 'statistic' + statisticRestMethod,
+        type: 'POST',
+        data : ({
+            name: statisticTargetName
+        }),
+        success: function(data) {
+            $('#detail_statistic_table').append("<tr><td>data.firstVisits</td><td>data.secondVisits</td><td>data.completedGoals</td></tr>");
+        },
+        error: function(xhr, status, error) {
+            var err = eval("(" + xhr.responseText + ")");
+            alert(xhr.responseText + " " + error + " " + status + " ");
+        }
+    });
+
+}
 
 
 
